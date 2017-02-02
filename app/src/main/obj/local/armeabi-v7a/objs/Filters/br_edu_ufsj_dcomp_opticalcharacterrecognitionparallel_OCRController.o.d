@@ -1,0 +1,2 @@
+./obj/local/armeabi-v7a/objs/Filters/br_edu_ufsj_dcomp_opticalcharacterrecognitionparallel_OCRController.o: \
+  jni/br_edu_ufsj_dcomp_opticalcharacterrecognitionparallel_OCRController.cpp
