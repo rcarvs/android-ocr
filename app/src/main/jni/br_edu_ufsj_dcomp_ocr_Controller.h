@@ -15,7 +15,7 @@ extern "C" {
  */
 void nativeImageToBlackAndWhite(JNIEnv *env,jlong dataPointerLong,jobject bitmap);
 JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv *env, jobject self);
-JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerLong,jobject bitmap);
+JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerEnv,jobject bitmap);
 
 #ifdef __cplusplus
 }

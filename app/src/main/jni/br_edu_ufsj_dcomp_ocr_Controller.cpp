@@ -1,18 +1,17 @@
 #include <jni.h>
 #include <android/log.h>
-#include <parallelme/ParallelME.hpp>
 #include <stdio.h>
 #include <android/bitmap.h>
 #include <cstring>
 #include <unistd.h>
 #include <vector>
+#include <parallelme/ParallelME.hpp>
+#include <parallelocr/ParallelOCR.hpp>
 #include "br_edu_ufsj_dcomp_ocr_Controller.h"
 
 using namespace parallelme;
+using namespace parallelocr;
 
-#define  LOG_TAG    "LogCpp"
-#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 const static char gKernels[] =     
 "__kernel void blackandwhite(__global uchar4 *image) {      \n"
@@ -27,22 +26,14 @@ const static char gKernels[] =
 "}                                                          \n";
 
 
+
+
 struct NativeData{
     std::shared_ptr<Runtime> runtime;
     std::shared_ptr<Program> program;
 };
 
 
-
-typedef struct{
-    uint8_t red, green, blue;
-} RGB;
-
-void convertIntToRgb(uint32_t pixel, RGB* rgb){
-    rgb->red = (int) ((pixel & 0x00FF0000) >> 16);
-    rgb->green = (int)((pixel & 0x0000FF00) >> 8);
-    rgb->blue = (int) (pixel & 0x00000FF);
-}
 
 typedef struct{
     int left, top, right, bottom;    
@@ -67,33 +58,22 @@ JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv 
 
 
 JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerLong,jobject bitmap){
+    //Initialize image class with pointer to image
+    Image image(env,&bitmap);
+    //Set the runtime e program objects in Image class
+    auto dataPointer = (NativeData *) dataPointerLong;
+    image.setRuntime(dataPointer->runtime);
+    image.setProgram(dataPointer->program);
+
     //first pass will put image in black and white
-    nativeImageToBlackAndWhite(env,dataPointerLong,bitmap);
-    //secont pass is access image pixels
-    AndroidBitmapInfo  info;
-    int ret;
-    void* pixels;
+    image.bitmapTransformBlackAndWhite();
+    bitmap = image.getBitmap();
 
-    if ((ret = AndroidBitmap_getInfo(env, bitmap, &info)) < 0) {
-            LOGE("AndroidBitmap_getInfo() failed ! error=%d", ret);
-            return;
-        }
-    if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888) {
-        LOGE("Bitmap format is not RGBA_8888 !");
-        return;
-    }
+    image.extractPixelsRGB();
 
-    if ((ret = AndroidBitmap_lockPixels(env, bitmap, &pixels)) < 0) {
-        LOGE("AndroidBitmap_lockPixels() failed ! error=%d", ret);
-    }
-    
+
+
     /*
-    FILE * arquivo = fopen("/sdcard/out.txt","w+");
-    fprintf(arquivo, "(%d %d %d) ",p.red,p.green,p.blue);    
-    fprintf(arquivo, "\n");    
-    fclose(arquivo);
-    */
-    //int red, green, blue;
     uint32_t* line;
     //now, the pixels are in var pixels, pass that for a unidimencional vector
     int size = (info.height*info.width);
@@ -104,21 +84,14 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
         for(unsigned int xx =0; xx < info.width; xx++){                    
             convertIntToRgb(line[xx],&rgbPixels[count]);
             count++;
-            //extract the RGB values from the pixel
-            /*red = (int) ((line[xx] & 0x00FF0000) >> 16);
-            green = (int)((line[xx] & 0x0000FF00) >> 8);
-            blue = (int) (line[xx] & 0x00000FF);
-            */
         }
 
         pixels = (char*)pixels + info.stride;
     }
 
-    int labels[(count)];
+    int *labels = (int*) malloc(sizeof(int)*count);
     
-    for(int i = 0;i<count;i++){
-        labels[i] = 0;        
-    }
+
 
     RGB rgbComp;
     int label = 0;
@@ -139,7 +112,6 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
             if(top != -1){
                 rgbComp = rgbPixels[top];
                 if((rgbPixels[i].red==rgbComp.red) && (rgbPixels[i].green==rgbComp.green) && (rgbPixels[i].blue==rgbComp.blue)){
-                    
                     equals[contEquals] = labels[top];
                     contEquals++;
                 }
@@ -196,8 +168,7 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
             if(contEquals == 0){
                 label++;
                 labels[i] = label;                
-            }else{                
-                //labels[i] = contEquals;                
+            }else{
                 int downLabel = 0;                
                 for(int j=0;j<contEquals;j++){                
                     if(equals[j] != 0){
@@ -351,12 +322,15 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
             }
         }
     }    
-    
+
+
+
+
     for(int i=0;i<size;i++){
-        if(labels[i] != 0){                                
+        if(labels[i] != 0){
             for(int j=0;j<label;j++){
                 if(labels[i] > equivalences[labels[i]][j] && equivalences[labels[i]][j] != 0){
-                    labels[i] = equivalences[labels[i]][j];                    
+                    labels[i] = equivalences[labels[i]][j];
                 }
             }
         }
@@ -371,23 +345,55 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     //next step is identify the limits of label for each label
     letter letters[upLabel];
     for(int i=0;i<=upLabel;i++){
-        letters[i].top = letters[i].bottom = letters[i].left = letters[i].right = 0;        
+        letters[i].top = letters[i].bottom = letters[i].left = letters[i].right = -1;
     }
 
     for(int i=0; i<size;i++){
         if(labels[i] != 0){
             int y = (int) (i+1)/info.width;
             int x = i%info.width;            
-            letters[labels[i]].top = ((y < letters[labels[i]].top || letters[labels[i]].top == 0) ? y : letters[labels[i]].top);
-            letters[labels[i]].bottom = ((y > letters[labels[i]].bottom || letters[labels[i]].bottom == 0) ? y : letters[labels[i]].bottom);
-            letters[labels[i]].left = ((x < letters[labels[i]].left || letters[labels[i]].left == 0) ? x : letters[labels[i]].left);
-            letters[labels[i]].right = ((x > letters[labels[i]].right || letters[labels[i]].right == 0) ? x : letters[labels[i]].right);
+            letters[labels[i]].top    = ((y < letters[labels[i]].top || letters[labels[i]].top == -1) ? y : letters[labels[i]].top);
+            letters[labels[i]].bottom = ((y > letters[labels[i]].bottom || letters[labels[i]].bottom == -1) ? y : letters[labels[i]].bottom);
+            letters[labels[i]].left   = ((x < letters[labels[i]].left || letters[labels[i]].left == -1) ? x : letters[labels[i]].left);
+            letters[labels[i]].right  = ((x > letters[labels[i]].right || letters[labels[i]].right == -1) ? x : letters[labels[i]].right);
 
         }
     }
 
 
     //identify the characters
+
+    //implementation of feature extraction
+    //
+    //1 - Crossing in each letter
+    //In my crossing, I'm seeing the backgrounds amount (set of labels with rotule 0 for each set of labels with not zero rotule)
+    //
+    for(int i = 1; i<=upLabel;i++){
+        //for each letter
+        //check if really have a letter on here
+        if(letters[i].top != 0 && letters[i].bottom != 0){
+            //calculate the size of letter inside the vector
+            std::string arquivo = "/sdcard/letter"+std::to_string(i)+".txt";
+
+            FILE * letterFile = fopen(arquivo.c_str(),"w+");
+            for(int y=letters[i].top;y<letters[i].bottom;y++){
+                int changes = 0;
+                for(int x=letters[i].left;x<letters[i].right;x++){
+                    if(labels[info.width*y+x] != labels[info.width*y+x+1]){
+                        changes++;
+                    }
+                    fprintf(letterFile,"%d",labels[info.width*y+x]);
+                }
+
+                fprintf(letterFile," - %d \n",changes);
+            }
+
+            fclose(letterFile);
+
+
+        }
+    }
+
     
 
 
@@ -406,35 +412,5 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
         fprintf(arquivo, "\n");    
     }
     fclose(arquivo);
-}
-
-
-
-
-void nativeImageToBlackAndWhite(JNIEnv *env,jlong dataPointerLong,jobject bitmap){
-    auto dataPointer = (NativeData *) dataPointerLong;
-    AndroidBitmapInfo info;    
-    int ret;
-    if((ret = AndroidBitmap_getInfo(env,bitmap,&info)) < 0){
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Image error: %d",ret);
-        return;
-    }
-    if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888){
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Image Format Error");
-        return;
-    }
-
-    long imageSize = info.height*info.width;
-    auto bitmapBuffer = std::make_shared<Buffer>(Buffer::sizeGenerator(imageSize, Buffer::RGBA));
-    bitmapBuffer->setAndroidBitmapSource(env,bitmap);
-    auto task = std::make_unique<Task>(dataPointer->program);    
-    task->addKernel("blackandwhite");
-    task->setConfigFunction([=] (DevicePtr &device, KernelHash &kernelHash) {
-        kernelHash["blackandwhite"]->setArg(0, bitmapBuffer)->setWorkSize(imageSize);
-    });
-    dataPointer->runtime->submitTask(std::move(task));
-    dataPointer->runtime->finish();    
-
-    bitmapBuffer->copyToAndroidBitmap(env, bitmap);
-
+    */
 }

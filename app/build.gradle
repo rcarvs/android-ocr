@@ -22,6 +22,7 @@ android {
         jni.srcDirs = [] //disable automatic ndk-build
     }
 
+
 }
 
 dependencies {

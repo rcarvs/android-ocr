@@ -1,2 +1,0 @@
-./obj/local/x86/objs/Filters/br_edu_ufsj_dcomp_opticalcharacterrecognitionparallel_OCRController.o: \
-  jni/br_edu_ufsj_dcomp_opticalcharacterrecognitionparallel_OCRController.cpp

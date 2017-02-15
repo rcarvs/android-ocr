@@ -1,5 +1,6 @@
 package br.edu.ufsj.dcomp.ocr;
 
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -7,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.contra_exemplo_crossing);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
         final Controller controller = new Controller();

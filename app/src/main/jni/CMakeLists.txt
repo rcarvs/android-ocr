@@ -31,6 +31,10 @@ set(SOURCE_FILES
     ParallelME/runtime/src/parallelme/SchedulerPAMS.cpp
     ParallelME/runtime/src/parallelme/Task.cpp
     ParallelME/runtime/src/parallelme/Worker.hpp
+    ParallelOCR/include/parallelocr/Image.hpp
+    ParallelOCR/include/parallelocr/RGB.hpp
+    ParallelOCR/include/parallelocr/ParallelOCR.hpp
+    ParallelOCR/src/parallelocr/Image.cpp
     br_edu_ufsj_dcomp_ocr_Controller.h
     br_edu_ufsj_dcomp_ocr_Controller.cpp)
 
