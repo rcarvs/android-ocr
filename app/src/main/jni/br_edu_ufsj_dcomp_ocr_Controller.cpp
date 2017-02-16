@@ -86,6 +86,18 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     }
     fclose(arquivo);
 
+    for(unsigned int i=0;i<image.getLetterCount();i++){
+        std::string arquivo = "/sdcard/letter"+std::to_string(i)+".txt";
+        FILE * letterFile = fopen(arquivo.c_str(),"w+");
+        for(unsigned int y=0;y<(image._letters[i].getDownLimit()-image._letters[i].getUpLimit());y++){
+            for(unsigned int x=0;x<(image._letters[i].getRightLimit()-image._letters[i].getLeftLimit());x++){
+                fprintf(letterFile, "%d", image._letters[i].getLabelElement((image._letters[i].getRightLimit()-image._letters[i].getLeftLimit())*y+x));
+            }
+            fprintf(letterFile, "\n");
+        }
+        fclose(letterFile);
+    }
+
 
     /*
     uint32_t* line;

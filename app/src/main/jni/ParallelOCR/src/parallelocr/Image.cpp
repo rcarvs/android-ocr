@@ -6,6 +6,7 @@
 #include <parallelocr/Image.hpp>
 #include <android/log.h>
 
+
 using namespace parallelocr;
 
 Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCount(0){
@@ -212,19 +213,18 @@ void Image::checkLabel(unsigned int index){
                 this->_pixels[index].setLabel(this->_pixels[neighbors[i]].getLabel());
             }
         }
-        if(this->_letters[this->_letterCount].getUpLimit() == 0 || (int)((index+1)/this->getWidth()) < this->_letters[this->_letterCount].getUpLimit()){
-            this->_letters[this->_letterCount].setUpLimit(((index+1)/this->getWidth()));
+        if((unsigned int)((index+1)/this->getWidth()) < this->_letters[this->_letterCount].getUpLimit()){
+            this->_letters[this->_letterCount].setUpLimit((unsigned int)((index+1)/this->getWidth()));
         }
-        if(this->_letters[this->_letterCount].getDownLimit() == 0 || (int)((index+1)/this->getWidth()) > this->_letters[this->_letterCount].getDownLimit()){
-            this->_letters[this->_letterCount].setDownLimit(((index+1)/this->getWidth()));
+        if((unsigned int)((index+1)/this->getWidth()) > this->_letters[this->_letterCount].getDownLimit()){
+            this->_letters[this->_letterCount].setDownLimit((unsigned int)((index+1)/this->getWidth()));
         }
-        if(this->_letters[this->_letterCount].getLeftLimit() == 0 || (index%this->getWidth()) < (unsigned int)this->_letters[this->_letterCount].getLeftLimit()){
-            this->_letters[this->_letterCount].setLeftLimit((index%this->getWidth()));
+        if((index%this->getWidth()) < (unsigned int)this->_letters[this->_letterCount].getLeftLimit()){
+            this->_letters[this->_letterCount].setLeftLimit((unsigned int)(index%this->getWidth()));
         }
-        if(this->_letters[this->_letterCount].getRightLimit() == 0 || (index%this->getWidth()) < (unsigned int)this->_letters[this->_letterCount].getRightLimit()){
-            this->_letters[this->_letterCount].setRightLimit((index%this->getWidth()));
+        if((index%this->getWidth()) > (unsigned int)this->_letters[this->_letterCount].getRightLimit()){
+            this->_letters[this->_letterCount].setRightLimit((unsigned int)(index%this->getWidth()));
         }
-
 
 
     }
@@ -238,7 +238,59 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
         //enter if the pixel is not white and not checked yet
         if(this->_pixels[i].getLabel() != 0 && !this->_pixels[i].getChecked()){
             //first call for check label
+            //start letter with your inverse
+            this->_letters[this->getLetterCount()].setUpLimit(this->getHeight());
+            this->_letters[this->getLetterCount()].setDownLimit(0);
+            this->_letters[this->getLetterCount()].setLeftLimit(this->getWidth());
+            this->_letters[this->getLetterCount()].setRightLimit(0);
+
+
             checkLabel(i);
+            /*
+            ---------------------------------------------------------
+            |       Rodar essa parte em uma nova thread             |
+            _________________________________________________________
+            */
+            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
+
+            //here I have the letters limits. Create a copy of matrix for send to buffer memory
+            //it can go to another thread
+
+            this->_letters[this->getLetterCount()].setLabels((unsigned  int*) malloc(sizeof(unsigned int)*(this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit())*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())));
+
+            for(unsigned int y = 0;
+                y < (this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit());
+                y++){
+                for (unsigned int x = 0;
+                    x < (this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit());
+                    x++){
+
+                    /*
+                    DEBUGS
+                    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Top: %d", this->_letters[this->getLetterCount()].getUpLimit()+y);
+                    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Left: %d", this->_letters[this->getLetterCount()].getLeftLimit()+x);
+                    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Pos: %d - Label: %d", (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),this->_pixels[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+(this->_letters[this->getLetterCount()].getLeftLimit()+x)].getLabel());
+                    */
+
+                    this->_letters[this->getLetterCount()].setLabelElement(
+                    (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),
+                    this->_pixels[
+                                (this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+
+                                (this->_letters[this->getLetterCount()].getLeftLimit()+x)
+                                ].getLabel());
+
+                }
+            }
+
+            //now I have a letter in another vector and it's ready to be processed for feature extraction
+            this->_letters[this->getLetterCount()].crossing();
+            /*
+            ----------------------------------------
+            |    ATÉ AQUI NA NOVA THREAD           |
+            ----------------------------------------
+            */
+
+
             this->_letterCount++;
 
         }

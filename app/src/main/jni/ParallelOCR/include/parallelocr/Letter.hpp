@@ -7,16 +7,16 @@
 namespace parallelocr{
 class Letter{
     public:
-        inline int getUpLimit(){
+        inline unsigned int getUpLimit(){
             return this->_upLimit;
         }
-        inline int getDownLimit(){
+        inline unsigned int getDownLimit(){
             return this->_downLimit;
         }
-        inline int getLeftLimit(){
+        inline unsigned int getLeftLimit(){
             return this->_leftLimit;
         }
-        inline int getRightLimit(){
+        inline unsigned int getRightLimit(){
             return this->_rightLimit;
         }
         inline void setUpLimit(unsigned int upLimit){
@@ -31,8 +31,24 @@ class Letter{
         inline void setRightLimit(unsigned int rightLimit){
             this->_rightLimit = rightLimit;
         }
+        inline unsigned int* getLabels(){
+            return this->_labels;
+        }
+        inline void setLabels(unsigned int *labels){
+            this->_labels = labels;
+        }
+        inline unsigned int getLabelElement(int index){
+            return this->_labels[index];
+        }
+        inline void setLabelElement(int index, unsigned int element){
+            this->_labels[index] = element;
+        }
+        void crossing();
+
     private:
         unsigned int _upLimit,_downLimit,_leftLimit,_rightLimit = 0;
+        unsigned int *_labels;
+
 };
 }
 #endif //OPTICALCHARACTERRECOGNITIONPARALLEL_LETTER_HPP

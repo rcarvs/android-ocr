@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.contra_exemplo_crossing);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste4);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
         final Controller controller = new Controller();
