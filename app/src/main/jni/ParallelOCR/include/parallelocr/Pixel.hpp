@@ -24,9 +24,17 @@ class Pixel{
             this->_label = label;
         }
 
+        inline bool getChecked(){
+            return this->_checked;
+        }
+        inline void setChecked(bool checked){
+            this->_checked = checked;
+        }
+
     private:
         RGB _rgb;
         unsigned int _label;
+        bool _checked;
 };
 }
 #endif //OPTICALCHARACTERRECOGNITIONPARALLEL_PIXEL_HPP

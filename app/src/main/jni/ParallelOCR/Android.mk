@@ -17,5 +17,6 @@ LOCAL_CPP_FEATURES += exceptions
 LOCAL_LDLIBS := -llog -ldl -ljnigraphics
 LOCAL_SRC_FILES := src/parallelocr/RGB.cpp \
                    src/parallelocr/Pixel.cpp \
-                   src/parallelocr/Image.cpp
+		   src/parallelocr/Letter.cpp \
+                   src/parallelocr/Image.cpp 
 include $(BUILD_SHARED_LIBRARY)

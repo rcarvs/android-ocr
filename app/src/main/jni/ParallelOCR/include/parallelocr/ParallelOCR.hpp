@@ -8,6 +8,7 @@
 
 #include "RGB.hpp"
 #include "Pixel.hpp"
+#include "Letter.hpp"
 #include "Image.hpp"
 
 

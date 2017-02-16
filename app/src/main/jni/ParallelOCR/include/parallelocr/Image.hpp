@@ -72,11 +72,34 @@ class Image {
             this->_stride = stride;
         }
 
+        inline Letter* getLetters(){
+            return this->_letters;
+        }
+
+        void setLetters(Letter* letters) {
+            this->_letters = letters;
+        }
+
+        inline unsigned int getLetterCount(){
+            return this->_letterCount;
+        }
+
+        void setLetterCount(unsigned int letterCount) {
+            this->_letterCount = letterCount;
+        }
+
+
+
         void bitmapTransformBlackAndWhite();
         void extractPixelsRGB();
+        unsigned int createDumblyLabels();
+        void relabelAndSearchLetters(unsigned int uplabel);
+        void checkLabel(unsigned int index);
         void toLabel();
 
 
+        Pixel *_pixels;
+        Letter *_letters;
     private:
         JNIEnv* _env;
         jobject *_bitmap;
@@ -84,9 +107,8 @@ class Image {
         std::shared_ptr<parallelme::Program> _program;
         unsigned int _height,_width;
         void *_storedPixels;
-        Pixel *_pixels;
         uint32_t _stride;
-
+        unsigned int _letterCount;
 
 };
 }

@@ -67,10 +67,24 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
 
     //first pass will put image in black and white
     image.bitmapTransformBlackAndWhite();
-    bitmap = image.getBitmap();
-
+    //second pass is extract the rgb values from each pixel
     image.extractPixelsRGB();
 
+    image.toLabel();
+
+    FILE * labelFile = fopen("/sdcard/labels.txt","w+");
+    for(unsigned int i=1;i<=image.getLetterCount();i++){
+        fprintf(labelFile, "Label: %d - TOP: %d | BOTTOM: %d | LEFT: %d | RIGHT: %d \n",i,image._letters[i].getUpLimit(),image._letters[i].getDownLimit(),image._letters[i].getLeftLimit(),image._letters[i].getRightLimit());
+    }
+    fclose(labelFile);
+    FILE * arquivo = fopen("/sdcard/out.txt","w+");
+    for(int i=0;i<(int) image.getHeight();i++){
+        for(int j=0;j<(int)image.getWidth();j++){
+            fprintf(arquivo, "%d ", image._pixels[(image.getWidth()*i+j)].getLabel());
+        }
+        fprintf(arquivo, "\n");
+    }
+    fclose(arquivo);
 
 
     /*

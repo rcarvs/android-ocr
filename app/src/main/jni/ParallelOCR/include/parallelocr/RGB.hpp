@@ -7,6 +7,7 @@
 namespace parallelocr{
 class RGB{
     public:
+        RGB();
         RGB(uint32_t pixel);
         RGB(int red,int green,int blue): _red(red),_green(green),_blue(blue){}
 
