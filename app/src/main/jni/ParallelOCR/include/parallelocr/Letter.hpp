@@ -1,7 +1,9 @@
 //
 // Created by rcarvs on 16/02/17.
 //
-
+#include "../../../ParallelME/runtime/include/parallelme/ParallelME.hpp"
+#include <parallelocr/ParallelOCR.hpp>
+#include <cstring>
 #ifndef OPTICALCHARACTERRECOGNITIONPARALLEL_LETTER_HPP
 #define OPTICALCHARACTERRECOGNITIONPARALLEL_LETTER_HPP
 namespace parallelocr{
@@ -43,12 +45,20 @@ class Letter{
         inline void setLabelElement(int index, unsigned int element){
             this->_labels[index] = element;
         }
-        void crossing();
+        inline char* getCrossingRotule(){
+            return this->_crossingRotule;
+        }
+        inline void setCrossingRotule(char *crossingRotule){
+            this->_crossingRotule = crossingRotule;
+        }
+
+        std::string normalizeCrossingValue(unsigned int *ccount);
+        void crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_ptr<parallelme::Program> program);
 
     private:
         unsigned int _upLimit,_downLimit,_leftLimit,_rightLimit = 0;
         unsigned int *_labels;
-
+        char *_crossingRotule;
 };
 }
 #endif //OPTICALCHARACTERRECOGNITIONPARALLEL_LETTER_HPP

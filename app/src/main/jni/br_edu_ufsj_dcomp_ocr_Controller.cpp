@@ -14,16 +14,29 @@ using namespace parallelocr;
 
 
 const static char gKernels[] =     
-"__kernel void blackandwhite(__global uchar4 *image) {      \n"
-"    int gid = get_global_id(0);                            \n"
-"    uchar4 pixel = image[gid];                             \n"
-"    if((pixel.x+pixel.y+pixel.z) > 645){                   \n"
-"       pixel.x = pixel.y = pixel.z = 255;                  \n"    
-"    }else{                                                 \n"    
-"       pixel.x = pixel.y = pixel.z = 0;                    \n"    
-"    }                                                      \n"    
-"    image[gid] = pixel;                                    \n"
-"}                                                          \n";
+"__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){	\n"
+"	uint id = get_global_id(0);														        \n"
+"	uint changes = 0;																        \n"
+"	for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){						        \n"
+"		if(letter[i] != letter[i+1]){												        \n"
+"			changes++;																        \n"
+"		}																			        \n"
+"	}																				        \n"
+"	ccount[id] = changes;														            \n"
+"}																					        \n"
+"																					        \n"
+"__kernel void blackandwhite(__global uchar4 *image) {      						        \n"
+"    int gid = get_global_id(0);                            						        \n"
+"    uchar4 pixel = image[gid];                             						        \n"
+"    if((pixel.x+pixel.y+pixel.z) > 645){                   						        \n"
+"       pixel.x = pixel.y = pixel.z = 255;                      					        \n"
+"    }else{                                                     					        \n"
+"       pixel.x = pixel.y = pixel.z = 0;                        					        \n"
+"    }                                                          					        \n"
+"    image[gid] = pixel;                                        					        \n"
+"}                                                          						        \n"
+"																					        \n";
+
 
 
 
@@ -72,6 +85,12 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
 
     image.toLabel();
 
+
+
+
+
+
+    /*
     FILE * labelFile = fopen("/sdcard/labels.txt","w+");
     for(unsigned int i=1;i<=image.getLetterCount();i++){
         fprintf(labelFile, "Label: %d - TOP: %d | BOTTOM: %d | LEFT: %d | RIGHT: %d \n",i,image._letters[i].getUpLimit(),image._letters[i].getDownLimit(),image._letters[i].getLeftLimit(),image._letters[i].getRightLimit());
@@ -98,7 +117,7 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
         fclose(letterFile);
     }
 
-
+    */
     /*
     uint32_t* line;
     //now, the pixels are in var pixels, pass that for a unidimencional vector
