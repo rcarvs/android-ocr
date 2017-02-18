@@ -1,6 +1,7 @@
 //
 // Created by rcarvs
 //
+
 #include <parallelocr/RGB.hpp>
 using namespace parallelocr;
 RGB::RGB(uint32_t pixel){

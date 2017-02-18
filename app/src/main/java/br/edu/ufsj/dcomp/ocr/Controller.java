@@ -1,6 +1,7 @@
 package br.edu.ufsj.dcomp.ocr;
 
 import android.graphics.Bitmap;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -25,12 +26,12 @@ public class Controller {
     /*
     * Native set image will put the image in jni
      */
-    private native void nativeCreateImageLabels(long dataPointer,Bitmap image);
+    private native void nativeCreateImageLabels(long dataPointer, Bitmap image, TextView tv);
 
 
 
-    public void createLabels(Bitmap image){
-        this.nativeCreateImageLabels(this.dataPointer,image);
+    public void createLabels(Bitmap image,TextView tv){
+        this.nativeCreateImageLabels(this.dataPointer,image,tv);
     }
 
     static {

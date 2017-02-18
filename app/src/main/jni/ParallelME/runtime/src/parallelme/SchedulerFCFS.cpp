@@ -24,10 +24,10 @@ std::unique_ptr<Task> SchedulerFCFS::pop(Device &device){
             && _taskList.front()->program().hasDeviceID(device.id())) {
         std::unique_ptr<Task> retTask = std::move(_taskList.front());
         _taskList.pop_front();
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Tentou retornar uma tarefa e retornou!!.");
+
         return retTask;
     } else {
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Tentou retornar uma tarefa e nao retornou nada!!.");
+
         _cv.notify_all();
         return nullptr;
     }

@@ -1,5 +1,5 @@
 //
-// Created by rcarvs on 16/02/17.
+// Created by rcarvs
 //
 #include "../../../ParallelME/runtime/include/parallelme/ParallelME.hpp"
 #include <parallelocr/ParallelOCR.hpp>
@@ -45,20 +45,22 @@ class Letter{
         inline void setLabelElement(int index, unsigned int element){
             this->_labels[index] = element;
         }
-        inline char* getCrossingRotule(){
+        inline unsigned int* getCrossingRotule(){
             return this->_crossingRotule;
         }
-        inline void setCrossingRotule(char *crossingRotule){
+        inline void setCrossingRotule(unsigned int *crossingRotule){
             this->_crossingRotule = crossingRotule;
         }
 
         std::string normalizeCrossingValue(unsigned int *ccount);
         void crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_ptr<parallelme::Program> program);
-
+        void letterIdentification();
     private:
-        unsigned int _upLimit,_downLimit,_leftLimit,_rightLimit = 0;
+        unsigned int _upLimit,_downLimit,_leftLimit,_rightLimit,_crossingRotuleSize = 0;
         unsigned int *_labels;
-        char *_crossingRotule;
+        unsigned int *_crossingRotule;
+
+        char letter;
 };
 }
 #endif //OPTICALCHARACTERRECOGNITIONPARALLEL_LETTER_HPP

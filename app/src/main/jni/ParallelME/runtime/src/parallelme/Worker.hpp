@@ -97,9 +97,9 @@ public:
                 }
                 if(_kill)
                     return;
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Waaaitiiiing");
+
                 _cv.wait(lock);
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Finalizou Waitting");
+
             }
 
             if(jvm)

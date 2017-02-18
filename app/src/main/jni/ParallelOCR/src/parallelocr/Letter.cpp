@@ -32,31 +32,26 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     runtime->finish();
 
     ccountBuffer->copyTo(ccount);
-    int countCross = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit());i++){
-        if(i == 0){
-            countCross++;
-        }else{
-            if(ccount[(i-1)] != ccount[i]){
-                countCross++;
-            }
+        if(ccount[(i+1)] != ccount[i]){
+                this->_crossingRotuleSize++;
         }
     }
-    this->_crossingRotule = (char*) malloc(sizeof(char*)*(countCross+1));
+    this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
     int contLetters = 0;
-    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit());i++){
-        if(i == 0){
-            std::snprintf(&this->_crossingRotule[contLetters],16,"%d",ccount[i]);
+    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
+        if(ccount[(i+1)] != ccount[i]){
+            this->_crossingRotule[contLetters] = ccount[i];
             contLetters++;
-        }else{
-            if(ccount[(i-1)] != ccount[i]){
-                std::snprintf(&this->_crossingRotule[contLetters],16,"%d",ccount[i]);
-                contLetters++;
-            }
         }
     }
 
-    this->_crossingRotule[contLetters] = '\0';
+    for(int i=0;i<contLetters;i++){
+        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d", this->_crossingRotule[i]);
+    }
+
+
+
     free(ccount);
 
 }
