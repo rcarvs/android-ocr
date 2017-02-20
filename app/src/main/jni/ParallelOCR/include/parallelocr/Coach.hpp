@@ -1,9 +1,10 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 #include <jni.h>
 #include <parallelocr/ParallelOCR.hpp>
 #include <sys/types.h>
+#include <string>
 #include <android/asset_manager.h>
 #include <android/asset_manager_jni.h>
 #ifndef OPTICALCHARACTERRECOGNITIONPARALLEL_COACH_HPP
@@ -15,23 +16,39 @@ class Coach{
         /*
         The objective is get the player structure in file and put in the set of players class
         */
+
         Coach(JNIEnv *env,jobject javaAssetManager);
 
-
-        //void Train(char letter,unsigned int labelsCount,unsigned int *labels);
         inline void setEnv(JNIEnv *env){
             this->_env = env;
         }
         inline AAssetManager* getAssetManager(){
             return this->_assetManager;
         }
+        inline Player getPlayer(int index){
+            return this->_players[index];
+        }
+        inline Player* getPlayers(){
+            return this->_players;
+        }
+        inline void setPlayers(Player *players){
+            this->_players = players;
+        }
         inline void setAssetManager(AAssetManager *assetManager){
             this->_assetManager = assetManager;
         }
+        inline void setPlayersCount(unsigned int playersCount){
+            this->_playersCount = playersCount;
+        }
+        inline unsigned int getPlayersCount(){
+            return this->_playersCount;
+        }
+        Player *_players;
+        std::string _file;
     private:
         JNIEnv *_env;
         AAssetManager *_assetManager;
-        //Player *_players;
+        unsigned int _playersCount;
 
 
 

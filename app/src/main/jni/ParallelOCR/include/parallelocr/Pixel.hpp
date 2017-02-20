@@ -1,5 +1,5 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 #include <parallelocr/RGB.hpp>
 #ifndef OPTICALCHARACTERRECOGNITIONPARALLEL_PIXEL_HPP

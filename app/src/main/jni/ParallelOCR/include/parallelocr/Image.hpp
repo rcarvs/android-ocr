@@ -1,5 +1,5 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 #include <jni.h>
 #include "../../../ParallelME/runtime/include/parallelme/ParallelME.hpp"
@@ -51,13 +51,18 @@ class Image {
             this->_env = env;
         }
 
+        inline std::shared_ptr<Coach> getCoach(){
+            return this->_coach;
+        }
         inline std::shared_ptr<parallelme::Runtime> getRuntime(){
             return this->_runtime;
         }
         inline std::shared_ptr<parallelme::Program> getProgram(){
             return this->_program;
         }
-
+        inline void setCoach(std::shared_ptr<Coach> coach){
+            this->_coach = coach;
+        }
         inline void setRuntime(std::shared_ptr<parallelme::Runtime> runtime){
             this->_runtime = runtime;
         }
@@ -83,6 +88,9 @@ class Image {
         inline unsigned int getLetterCount(){
             return this->_letterCount;
         }
+        inline Letter getLetter(int index){
+            return this->_letters[index];
+        }
 
         void setLetterCount(unsigned int letterCount) {
             this->_letterCount = letterCount;
@@ -98,17 +106,18 @@ class Image {
         void toLabel();
 
 
-        Pixel *_pixels;
-        Letter *_letters;
     private:
         JNIEnv* _env;
         jobject *_bitmap;
+        std::shared_ptr<Coach> _coach;
         std::shared_ptr<parallelme::Runtime> _runtime;
         std::shared_ptr<parallelme::Program> _program;
         unsigned int _height,_width;
         void *_storedPixels;
         uint32_t _stride;
         unsigned int _letterCount;
+        Pixel *_pixels;
+        Letter *_letters;
 
 };
 }

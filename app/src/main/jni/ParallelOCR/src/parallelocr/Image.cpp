@@ -1,5 +1,5 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 
 
@@ -246,10 +246,11 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
 
 
             checkLabel(i);
+
             /*
-            ---------------------------------------------------------
-            |       Rodar essa parte em uma nova thread             |
-            _________________________________________________________
+            ------------------------------------------------------------
+            |   Aqui vira um submit task para rodar a identificação    |
+            ____________________________________________________________
             */
             if(this->_letters[this->getLetterCount()].getDownLimit() != this->_letters[this->getLetterCount()].getUpLimit() && this->_letters[this->getLetterCount()].getRightLimit() != this->_letters[this->getLetterCount()].getLeftLimit()){
                 __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
@@ -284,7 +285,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 }
 
                 //now I have a letter in another vector and it's ready to be processed for feature extraction
-                this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram());
+                this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
 
             }
             /*

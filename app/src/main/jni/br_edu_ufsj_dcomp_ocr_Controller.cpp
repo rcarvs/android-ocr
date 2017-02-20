@@ -68,6 +68,7 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     Image image(env,&bitmap);
     //Set the runtime e program objects in Image class
     auto dataPointer = (NativeData *) dataPointerLong;
+    image.setCoach(dataPointer->coach);
     image.setRuntime(dataPointer->runtime);
     image.setProgram(dataPointer->program);
 
@@ -80,10 +81,15 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     //because the feature extraction is in matrix search time :D :D :D
     image.toLabel();
 
+    //for print phrase
+    std::string phrase = "";
+    for(unsigned int i = 0;i<image.getLetterCount();i++){
+        phrase = phrase+image.getLetter(i)._letter;
 
 
+    }
 
 
-    jstring jstr = (*env).NewStringUTF( "This comes from jni.");
-    (*env).CallVoidMethod( textViewOutOut, setText, jstr);
+    jstring result = (*env).NewStringUTF(phrase.c_str());
+    (*env).CallVoidMethod( textViewOutOut, setText, result);
 }

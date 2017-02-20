@@ -8,18 +8,26 @@ namespace parallelocr{
 class Player{
     public:
         Player();
-        Player(char letter,unsigned int labelsCount,unsigned int *labels):_letter(letter),_labels(labels),_labelsCount(labelsCount){}
-        inline void setLetter(char letter){
+
+        inline void setLetter(char *letter){
             this->_letter = letter;
         }
         inline void setLabels(unsigned int *labels){
             this->_labels = labels;
         }
+        inline void setLabel(int index,unsigned int label){
+            this->_labels[index] = label;
+        }
+
         inline void setLabelsCount(unsigned int labelsCount){
             this->_labelsCount = labelsCount;
         }
-        inline char getLetter(){
+
+        inline char* getLetter(){
             return this->_letter;
+        }
+        inline unsigned int getLabel(int index){
+            return this->_labels[index];
         }
         inline unsigned int* getLabels(){
             return this->_labels;
@@ -27,8 +35,8 @@ class Player{
         inline unsigned int getLabelsCount(){
             return this->_labelsCount;
         }
+        char *_letter;
     private:
-        char _letter;
         unsigned int *_labels;
         unsigned int _labelsCount;
 };

@@ -1,5 +1,5 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 #include <unistd.h>
 #ifndef OPTICALCHARACTERRECOGNITIONPARALLEL_RGB_HPP

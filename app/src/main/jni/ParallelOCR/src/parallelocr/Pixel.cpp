@@ -1,5 +1,5 @@
 //
-// Created by rcarvs
+// Created by Renan Carvalho
 //
 #include <parallelocr/Pixel.hpp>
 using namespace parallelocr;
