@@ -1,6 +1,7 @@
 package br.edu.ufsj.dcomp.ocr;
 
 
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -23,26 +24,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.as);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.af);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
 
         tv = (TextView) findViewById(R.id.tv);
 
 
-
-
+        final Controller controller = new Controller();
+        controller.startJniStructures(getAssets());
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final Controller controller = new Controller();
-                        controller.createLabels(image,tv);
-                        imgView.setImageBitmap(image);
-                    }
-                }).run();
+            controller.createLabels(image,tv);
+            imgView.setImageBitmap(image);
+
             }
         });
 

@@ -34,9 +34,12 @@ set(SOURCE_FILES
     ParallelOCR/include/parallelocr/Image.hpp
     ParallelOCR/include/parallelocr/RGB.hpp
     ParallelOCR/include/parallelocr/Letter.hpp
+    ParallelOCR/include/parallelocr/Player.hpp
+    ParallelOCR/include/parallelocr/Coach.hpp
     ParallelOCR/include/parallelocr/ParallelOCR.hpp
     ParallelOCR/src/parallelocr/Image.cpp
     ParallelOCR/src/parallelocr/Letter.cpp
+    ParallelOCR/src/parallelocr/Coach.cpp
     br_edu_ufsj_dcomp_ocr_Controller.h
     br_edu_ufsj_dcomp_ocr_Controller.cpp)
 

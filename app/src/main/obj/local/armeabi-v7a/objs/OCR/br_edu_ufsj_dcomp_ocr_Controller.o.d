@@ -69,6 +69,8 @@
   /home/rcarvs/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cmath \
   /home/rcarvs/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/math.h \
   jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp \
+  jni/ParallelOCR/include/parallelocr/Player.hpp \
+  jni/ParallelOCR/include/parallelocr/Coach.hpp \
   jni/ParallelOCR/include/parallelocr/RGB.hpp \
   jni/ParallelOCR/include/parallelocr/Pixel.hpp \
   jni/ParallelOCR/include/parallelocr/Letter.hpp \
@@ -212,6 +214,10 @@ jni/ParallelME/runtime/include/parallelme/Task.hpp:
 /home/rcarvs/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/math.h:
 
 jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp:
+
+jni/ParallelOCR/include/parallelocr/Player.hpp:
+
+jni/ParallelOCR/include/parallelocr/Coach.hpp:
 
 jni/ParallelOCR/include/parallelocr/RGB.hpp:
 

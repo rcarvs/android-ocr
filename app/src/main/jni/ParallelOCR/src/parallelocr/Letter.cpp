@@ -32,11 +32,14 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     runtime->finish();
 
     ccountBuffer->copyTo(ccount);
-    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit());i++){
+    this->_crossingRotuleSize = 0;
+    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
         if(ccount[(i+1)] != ccount[i]){
                 this->_crossingRotuleSize++;
         }
     }
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d", this->_crossingRotuleSize);
+
     this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
     int contLetters = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
@@ -45,13 +48,31 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
             contLetters++;
         }
     }
+    free(ccount);
 
-    for(int i=0;i<contLetters;i++){
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d", this->_crossingRotule[i]);
+
+    /*
+     ______________________________________
+    | implements here the recognition phase|
+     --------------------------------------
+    */
+
+
+    bool train = false;
+
+    if(train){
+        /*
+            The training will to be stored in sdcard/traindata.txt
+        */
+        char trainchar[2] = "Q";
+        FILE *trainfile = fopen("sdcard/traindata2.txt","a");
+        fprintf(trainfile,"%s ",trainchar);
+        for(int i=0;i<contLetters;i++){
+            fprintf(trainfile,"%d ",this->_crossingRotule[i]);
+        }
+        fprintf(trainfile,"\n");
+        fclose(trainfile);
     }
 
-
-
-    free(ccount);
 
 }

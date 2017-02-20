@@ -38,31 +38,21 @@ const static char gKernels[] =
 "																					        \n";
 
 
-
-
-
 struct NativeData{
+    std::shared_ptr<Coach> coach;
     std::shared_ptr<Runtime> runtime;
     std::shared_ptr<Program> program;
 };
 
 
+JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv *env, jobject self, jobject javaAssetManager) {
+    JavaVM *jvm;
+    env->GetJavaVM(&jvm);
+    if(!jvm) return (jlong) nullptr;
 
-typedef struct{
-    int left, top, right, bottom;    
-    char letter;
-} letter;
-
-
-
-
-JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv *env, jobject self) {
-    JavaVM *jvm; //cria um ponteiro para uma jvm
-    env->GetJavaVM(&jvm); //adiciona a jvm da execução para o ponteiro criado anteriormente
-    if(!jvm) return (jlong) nullptr; //se n encontrar a jvm retorna um nullptr
-
-    auto dataPointer = new NativeData(); //cria um ponteiro para os dados da struct NativeData
-    dataPointer->runtime = std::make_shared<Runtime>(jvm,std::make_shared<SchedulerFCFS>()); //preenche o objeto runtime da struct nativedata
+    auto dataPointer = new NativeData();
+    dataPointer->coach = std::make_shared<Coach>(env,javaAssetManager);
+    dataPointer->runtime = std::make_shared<Runtime>(jvm,std::make_shared<SchedulerFCFS>());
     dataPointer->program = std::make_shared<Program>(dataPointer->runtime, gKernels);
 
     return (jlong) dataPointer;
@@ -74,6 +64,7 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     jclass clazz = (*env).FindClass("android/widget/TextView");
     jmethodID setText = (*env).GetMethodID(clazz, "setText", "(Ljava/lang/CharSequence;)V");
     //Initialize image class with pointer to image
+
     Image image(env,&bitmap);
     //Set the runtime e program objects in Image class
     auto dataPointer = (NativeData *) dataPointerLong;
