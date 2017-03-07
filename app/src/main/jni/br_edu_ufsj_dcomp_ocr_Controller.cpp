@@ -25,12 +25,16 @@ const static char gKernels[] =
 "	ccount[id] = changes;														            \n"
 "}																					        \n"
 "																					        \n"
-"__kernel void blackandwhite(__global uchar4 *image) {      						        \n"
+"__kernel void blackandwhite(__global uchar4 *image,__global uint4 *pixelsInfo) {      		\n"
 "    int gid = get_global_id(0);                            						        \n"
 "    uchar4 pixel = image[gid];                             						        \n"
+"    uint4 pixelInfo = pixelsInfo[gid];                             						\n"
 "    if((pixel.x+pixel.y+pixel.z) > 645){                   						        \n"
+"       pixelInfo.x=pixelInfo.y=pixelInfo.z=0;                                              \n"
 "       pixel.x = pixel.y = pixel.z = 255;                      					        \n"
 "    }else{                                                     					        \n"
+"       pixelInfo.x=1;                                                                      \n"
+"       pixelInfo.y=pixelInfo.z=0;                                                          \n"
 "       pixel.x = pixel.y = pixel.z = 0;                        					        \n"
 "    }                                                          					        \n"
 "    image[gid] = pixel;                                        					        \n"
@@ -85,8 +89,6 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     std::string phrase = "";
     for(unsigned int i = 0;i<image.getLetterCount();i++){
         phrase = phrase+image.getLetter(i)._letter;
-
-
     }
 
 

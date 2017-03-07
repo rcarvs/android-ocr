@@ -22,20 +22,39 @@ Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCoun
     this->setWidth(info.width);
     this->setHeight(info.height);
 }
-
+typedef struct{
+    unsigned int black,label,checked;
+} pixelInfo;
 void Image::bitmapTransformBlackAndWhite(){
+    pixelInfo *pixels = (pixelInfo*) malloc(sizeof(pixelInfo)*this->getHeight()*this->getWidth());
     auto bitmapBuffer = std::make_shared<parallelme::Buffer>(parallelme::Buffer::sizeGenerator((this->getHeight()*this->getWidth()),parallelme::Buffer::RGBA));
     bitmapBuffer->setAndroidBitmapSource(this->getEnv(),this->getBitmap());
+    auto pixelsBuffer = std::make_shared<parallelme::Buffer>(sizeof(pixelInfo)*this->getHeight()*this->getWidth());
+    pixelsBuffer->setSource(pixels);
     auto task = std::make_unique<parallelme::Task>(this->getProgram());
     task->addKernel("blackandwhite");
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
-            kernelHash["blackandwhite"]->setArg(0, bitmapBuffer)->setWorkSize((this->getWidth()*this->getHeight()));
+            kernelHash["blackandwhite"]
+            ->setArg(0, bitmapBuffer)
+            ->setArg(1, pixelsBuffer)
+            ->setWorkSize((this->getWidth()*this->getHeight()));
     });
     this->getRuntime()->submitTask(std::move(task));
     this->getRuntime()->finish();
     bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap());
+    pixelsBuffer->copyTo(pixels);
+    for(unsigned int i=0;i<(this->getWidth()*this->getHeight());i++){
+        if(pixels[i].black != 0){
+            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ", pixels[i].black);
+        }
+    }
 }
+/*
+ ________________________________________
+ |   Criar uma task para fazer isso     |
+ ----------------------------------------
+*/
 
 void Image::extractPixelsRGB(){
     uint32_t* line;

@@ -8,7 +8,7 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/typeinfo \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/exception \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdint \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/stdint.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/new \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef___deallocate \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/utility \
@@ -43,7 +43,7 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/chrono \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/time.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno \
@@ -82,7 +82,7 @@ jni/ParallelME/runtime/include/parallelme/Device.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdint:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h:
+/home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/stdint.h:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/new:
 
@@ -152,7 +152,7 @@ jni/ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h:
+/home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/time.h:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio:
 

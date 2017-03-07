@@ -35,7 +35,7 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/chrono \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/time.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno \
@@ -132,7 +132,7 @@ jni/ParallelME/runtime/include/parallelme/Scheduler.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h:
+/home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/time.h:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio:
 
