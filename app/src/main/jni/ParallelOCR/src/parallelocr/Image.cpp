@@ -21,34 +21,56 @@ Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCoun
     this->setStride(info.stride);
     this->setWidth(info.width);
     this->setHeight(info.height);
+
+    //this is for parallelize of pixels info extraction
+    this->_r = (unsigned int*) malloc(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    this->_g = (unsigned int*) malloc(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    this->_b = (unsigned int*) malloc(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    this->_label = (unsigned int*) malloc(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    this->_checked = (unsigned int*) malloc(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+
 }
-typedef struct{
-    unsigned int black,label,checked;
-} pixelInfo;
+
 void Image::bitmapTransformBlackAndWhite(){
-    pixelInfo *pixels = (pixelInfo*) malloc(sizeof(pixelInfo)*this->getHeight()*this->getWidth());
     auto bitmapBuffer = std::make_shared<parallelme::Buffer>(parallelme::Buffer::sizeGenerator((this->getHeight()*this->getWidth()),parallelme::Buffer::RGBA));
     bitmapBuffer->setAndroidBitmapSource(this->getEnv(),this->getBitmap());
-    auto pixelsBuffer = std::make_shared<parallelme::Buffer>(sizeof(pixelInfo)*this->getHeight()*this->getWidth());
-    pixelsBuffer->setSource(pixels);
+    auto rBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    rBuffer->setSource(this->_r);
+    auto gBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    gBuffer->setSource(this->_g);
+    auto bBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    bBuffer->setSource(this->_b);
+    auto labelBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    labelBuffer->setSource(this->_label);
+    auto checkedBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    checkedBuffer->setSource(this->_checked);
+
     auto task = std::make_unique<parallelme::Task>(this->getProgram());
     task->addKernel("blackandwhite");
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
             kernelHash["blackandwhite"]
             ->setArg(0, bitmapBuffer)
-            ->setArg(1, pixelsBuffer)
+            ->setArg(1, rBuffer)
+            ->setArg(2, gBuffer)
+            ->setArg(3, bBuffer)
+            ->setArg(4, labelBuffer)
+            ->setArg(5, checkedBuffer)
             ->setWorkSize((this->getWidth()*this->getHeight()));
     });
     this->getRuntime()->submitTask(std::move(task));
     this->getRuntime()->finish();
     bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap());
-    pixelsBuffer->copyTo(pixels);
-    for(unsigned int i=0;i<(this->getWidth()*this->getHeight());i++){
-        if(pixels[i].black != 0){
-            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ", pixels[i].black);
-        }
-    }
+    rBuffer->copyTo(this->_r);
+    gBuffer->copyTo(this->_g);
+    bBuffer->copyTo(this->_b);
+    labelBuffer->copyTo(this->_label);
+    checkedBuffer->copyTo(this->_checked);
+
+    /*for(unsigned int i=0;i < (this->getWidth()*this->getHeight());i++){
+        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d", this->_r[i],this->_g[i],this->_b[i]);
+    }*/
+
 }
 /*
  ________________________________________
@@ -56,7 +78,7 @@ void Image::bitmapTransformBlackAndWhite(){
  ----------------------------------------
 */
 
-void Image::extractPixelsRGB(){
+/*void Image::extractPixelsRGB(){
     uint32_t* line;
     this->setPixels((Pixel*) malloc(sizeof(Pixel)*(this->getHeight()*this->getWidth())));
     for(unsigned int y=0;y<this->getHeight();y++){
@@ -68,14 +90,14 @@ void Image::extractPixelsRGB(){
         }
         this->setStoredPixels((char*)this->getStoredPixels() + this->getStride());
     }
-}
+}*/
 
 
 unsigned int Image::createDumblyLabels(){
     int upLabel = 0;
     for(unsigned int i=0;i<(this->getHeight()*this->getWidth());i++){
         //if is not white
-        if((this->_pixels[i].getRGB().getRed()+this->_pixels[i].getRGB().getGreen()+this->_pixels[i].getRGB().getBlue()) != (255*3)){
+        if((this->_r[i]+this->_g[i]+this->_b[i]) != (255*3)){
             //get the eight neighbors of actual pixel
             int top  = (((int)(i-this->getWidth()) >= 0)?(i-this->getWidth()):-1);
             int topLeft = (((int)(i-this->getWidth()-1)>=0 && ((i-this->getWidth())/this->getWidth()) == ((i-this->getWidth()-1)/this->getWidth()))?(i-this->getWidth()-1):-1);
@@ -90,72 +112,72 @@ unsigned int Image::createDumblyLabels(){
             int contEquals = 0;
             //now compare each neighbor to now if is equal
             if(top != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[top].getRGB().getRed()) &&
-                 (this->_pixels[i].getRGB().getGreen()==this->_pixels[top].getRGB().getGreen()) &&
-                 (this->_pixels[i].getRGB().getBlue()==this->_pixels[top].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[top].getLabel();
+                if((this->_r[i]==this->_r[top]) &&
+                 (this->_g[i]==this->_g[top]) &&
+                 (this->_b[i]==this->_b[top])){
+                    equals[contEquals] = this->_label[top];
                     contEquals++;
                 }
             }
             if(topLeft != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[topLeft].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[topLeft].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[topLeft].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[topLeft].getLabel();
+                if((this->_r[i]==this->_r[topLeft]) &&
+                (this->_g[i]==this->_g[topLeft]) &&
+                (this->_b[i]==this->_b[topLeft])){
+                    equals[contEquals] = this->_label[topLeft];
                     contEquals++;
                 }
             }
             if(topRight != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[topRight].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[topRight].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[topRight].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[topRight].getLabel();
+                if((this->_r[i]==this->_r[topRight]) &&
+                (this->_g[i]==this->_g[topRight]) &&
+                (this->_b[i]==this->_b[topRight])){
+                    equals[contEquals] = this->_label[topRight];
                     contEquals++;
                 }
             }
             if(left != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[left].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[left].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[left].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[left].getLabel();
+                if((this->_r[i]==this->_r[left]) &&
+                (this->_g[i]==this->_g[left]) &&
+                (this->_b[i]==this->_b[left])){
+                    equals[contEquals] = this->_label[left];
                     contEquals++;
                 }
             }
             if(right != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[right].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[right].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[right].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[right].getLabel();
+                if((this->_r[i]==this->_r[right]) &&
+                (this->_g[i]==this->_g[right]) &&
+                (this->_b[i]==this->_b[right])){
+                    equals[contEquals] = this->_label[right];
                     contEquals++;
                 }
             }
             if(down != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[down].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[down].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[down].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[down].getLabel();
+                if((this->_r[i]==this->_r[down]) &&
+                (this->_g[i]==this->_g[down]) &&
+                (this->_b[i]==this->_b[down])){
+                    equals[contEquals] = this->_label[down];
                     contEquals++;
                 }
             }
             if(downLeft != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[downLeft].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[downLeft].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[downLeft].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[downLeft].getLabel();
+                if((this->_r[i]==this->_r[downLeft]) &&
+                (this->_g[i]==this->_g[downLeft]) &&
+                (this->_b[i]==this->_b[downLeft])){
+                    equals[contEquals] = this->_label[downLeft];
                     contEquals++;
                 }
             }
             if(downRight != -1){
-                if((this->_pixels[i].getRGB().getRed()==this->_pixels[downRight].getRGB().getRed()) &&
-                (this->_pixels[i].getRGB().getGreen()==this->_pixels[downRight].getRGB().getGreen()) &&
-                (this->_pixels[i].getRGB().getBlue()==this->_pixels[downRight].getRGB().getBlue())){
-                    equals[contEquals] = this->_pixels[downRight].getLabel();
+                if((this->_r[i]==this->_r[downRight]) &&
+                (this->_g[i]==this->_g[downRight]) &&
+                (this->_b[i]==this->_b[downRight])){
+                    equals[contEquals] = this->_label[downRight];
                     contEquals++;
                 }
             }
             if(contEquals == 0){
                 upLabel++;
-                this->_pixels[i].setLabel(upLabel);
+                this->_label[i] = upLabel;
             }else{
                 int downLabel = 0;
                 for(int j=0;j<contEquals;j++){
@@ -169,9 +191,9 @@ unsigned int Image::createDumblyLabels(){
                 }
                 if(downLabel == 0){
                     upLabel++;
-                    this->_pixels[i].setLabel(upLabel);
+                    this->_label[i] = upLabel;
                 }else{
-                    this->_pixels[i].setLabel(downLabel);
+                    this->_label[i] = downLabel;
                 }
             }
         }
@@ -180,7 +202,7 @@ unsigned int Image::createDumblyLabels(){
 }
 void Image::checkLabel(unsigned int index){
     //just a check to now with thats not a wrong call
-    if(this->_pixels[index].getLabel() != 0 && !this->_pixels[index].getChecked()){
+    if(this->_label[index] != 0 && this->_checked[index] == 0){
         //get the neighbors not checked yet and put in a list to be executed
         int *neighbors = (int*) malloc(sizeof(int)*8);
         int count = 0;
@@ -215,21 +237,21 @@ void Image::checkLabel(unsigned int index){
         )?(neighbors[count] = (index+this->getWidth()+1),count++):-1);
 
         for(int i=0;i<count;i++){
-            if(this->_pixels[neighbors[i]].getLabel() != 0 &&
-                this->_pixels[neighbors[i]].getLabel() < this->_pixels[index].getLabel()){
-                this->_pixels[index].setLabel(this->_pixels[neighbors[i]].getLabel());
+            if(this->_label[neighbors[i]] != 0 &&
+                this->_label[neighbors[i]] < this->_label[index]){
+                this->_label[index] = this->_label[neighbors[i]];
             }
         }
-        this->_pixels[index].setChecked(true);
+        this->_checked[index] = 1;
         for(int i=0;i<count;i++){
-            if(this->_pixels[neighbors[i]].getLabel() != 0 && !this->_pixels[neighbors[i]].getChecked()){
+            if(this->_label[neighbors[i]] != 0 && this->_checked[neighbors[i]] == 0){
                 checkLabel(neighbors[i]);
             }
         }
         for(int i=0;i<count;i++){
-            if(this->_pixels[neighbors[i]].getLabel() != 0 &&
-                this->_pixels[neighbors[i]].getLabel() < this->_pixels[index].getLabel()){
-                this->_pixels[index].setLabel(this->_pixels[neighbors[i]].getLabel());
+            if(this->_label[neighbors[i]] != 0 &&
+                this->_label[neighbors[i]] < this->_label[index]){
+                this->_label[index] = this->_label[neighbors[i]];
             }
         }
         if((unsigned int)((index+1)/this->getWidth()) < this->_letters[this->_letterCount].getUpLimit()){
@@ -255,7 +277,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
     
     for(unsigned int i = 0;i<(this->getWidth()*this->getHeight());i++){
         //enter if the pixel is not white and not checked yet
-        if(this->_pixels[i].getLabel() != 0 && !this->_pixels[i].getChecked()){
+        if(this->_label[i] != 0 && this->_checked[i] == 0){
             //first call for check label
             //start letter with your inverse
             this->_letters[this->getLetterCount()].setUpLimit(this->getHeight());
@@ -278,7 +300,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 //it can go to another thread
 
                 this->_letters[this->getLetterCount()].setLabels((unsigned  int*) malloc(sizeof(unsigned int)*(this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit())*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())));
-
+                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Test");
                 for(unsigned int y = 0;
                     y < (this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit());
                     y++){
@@ -295,16 +317,14 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
 
                         this->_letters[this->getLetterCount()].setLabelElement(
                         (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),
-                        this->_pixels[
-                                    (this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+
-                                    (this->_letters[this->getLetterCount()].getLeftLimit()+x)
-                                    ].getLabel());
-
+                        this->_label[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))
+                                    +(this->_letters[this->getLetterCount()].getLeftLimit()+x)]);
                     }
                 }
-
                 //now I have a letter in another vector and it's ready to be processed for feature extraction
+                //create the task in the crossing function
                 this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
+                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Test");
 
             }
             /*

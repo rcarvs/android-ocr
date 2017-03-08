@@ -12,7 +12,6 @@ Coach::Coach(JNIEnv *env,jobject javaAssetManager){
     this->setAssetManager(AAssetManager_fromJava(env, javaAssetManager));
     AAsset* openInfo = AAssetManager_open(this->getAssetManager(),"coach/data.txt",AASSET_MODE_BUFFER);
     if(!openInfo){
-        //show a error message
         __android_log_print(ANDROID_LOG_INFO, "Log Error", "Not was possible open the info.txt");
         return;
     }

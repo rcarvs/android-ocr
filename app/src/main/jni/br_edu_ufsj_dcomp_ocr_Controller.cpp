@@ -14,32 +14,28 @@ using namespace parallelocr;
 
 
 const static char gKernels[] =     
-"__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){	\n"
-"	uint id = get_global_id(0);														        \n"
-"	uint changes = 0;																        \n"
-"	for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){						        \n"
-"		if(letter[i] != letter[i+1]){												        \n"
-"			changes++;																        \n"
-"		}																			        \n"
-"	}																				        \n"
-"	ccount[id] = changes;														            \n"
-"}																					        \n"
-"																					        \n"
-"__kernel void blackandwhite(__global uchar4 *image,__global uint4 *pixelsInfo) {      		\n"
-"    int gid = get_global_id(0);                            						        \n"
-"    uchar4 pixel = image[gid];                             						        \n"
-"    uint4 pixelInfo = pixelsInfo[gid];                             						\n"
-"    if((pixel.x+pixel.y+pixel.z) > 645){                   						        \n"
-"       pixelInfo.x=pixelInfo.y=pixelInfo.z=0;                                              \n"
-"       pixel.x = pixel.y = pixel.z = 255;                      					        \n"
-"    }else{                                                     					        \n"
-"       pixelInfo.x=1;                                                                      \n"
-"       pixelInfo.y=pixelInfo.z=0;                                                          \n"
-"       pixel.x = pixel.y = pixel.z = 0;                        					        \n"
-"    }                                                          					        \n"
-"    image[gid] = pixel;                                        					        \n"
-"}                                                          						        \n"
-"																					        \n";
+"__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){																\n"
+"	uint id = get_global_id(0);														        															\n"
+"	uint changes = 0;																        															\n"
+"	for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){						        															\n"
+"		if(letter[i] != letter[i+1]){												        															\n"
+"			changes++;																        															\n"
+"		}																			        															\n"
+"	}																				        															\n"
+"	ccount[id] = changes;														            															\n"
+"}																					        															\n"
+"																					        															\n"
+"__kernel void blackandwhite(__global uchar4 *image,__global uint *r,__global uint *g,__global uint *b,__global uint *label,__global uint *checked) {   \n"
+"    int gid = get_global_id(0);                            						        															\n"
+"    uchar4 pixel = image[gid];                             						        															\n"
+"    label[gid] = checked[gid] = 0;																														\n"
+"    if((pixel.x+pixel.y+pixel.z) > 645){                   						        															\n"
+"		r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 255;                      																\n"
+"    }else{                                                     					        															\n"
+"    	r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 0;                        																\n"
+"    }                                                          					        															\n"
+"    image[gid] = pixel;                                        					        															\n"
+"} 																																						\n";
 
 
 struct NativeData{
@@ -79,7 +75,7 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     //first pass will put image in black and white
     image.bitmapTransformBlackAndWhite();
     //second pass is extract the rgb values from each pixel
-    image.extractPixelsRGB();
+    //image.extractPixelsRGB();
     //now the function to label release all work for rotule and release a feature extraction
     //why the feature extraction are in same function of labeling???
     //because the feature extraction is in matrix search time :D :D :D

@@ -8,8 +8,6 @@
 
 #include "Player.hpp"
 #include "Coach.hpp"
-#include "RGB.hpp"
-#include "Pixel.hpp"
 #include "Letter.hpp"
 #include "Image.hpp"
 

@@ -34,8 +34,6 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stdexcept \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/atomic \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef_min_max \
-  jni/ParallelOCR/include/parallelocr/RGB.hpp \
-  jni/ParallelOCR/include/parallelocr/Pixel.hpp \
   jni/ParallelOCR/include/parallelocr/Letter.hpp \
   jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/ParallelME.hpp \
   jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Buffer.hpp \
@@ -63,6 +61,7 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/errno.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/list \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex \
@@ -143,10 +142,6 @@ jni/ParallelOCR/include/parallelocr/Player.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef_min_max:
 
-jni/ParallelOCR/include/parallelocr/RGB.hpp:
-
-jni/ParallelOCR/include/parallelocr/Pixel.hpp:
-
 jni/ParallelOCR/include/parallelocr/Letter.hpp:
 
 jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/ParallelME.hpp:
@@ -200,6 +195,8 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/errno.h:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support:
 

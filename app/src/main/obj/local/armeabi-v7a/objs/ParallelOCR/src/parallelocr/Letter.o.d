@@ -72,8 +72,6 @@
   jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp \
   jni/ParallelOCR/include/parallelocr/Player.hpp \
   jni/ParallelOCR/include/parallelocr/Coach.hpp \
-  jni/ParallelOCR/include/parallelocr/RGB.hpp \
-  jni/ParallelOCR/include/parallelocr/Pixel.hpp \
   jni/ParallelOCR/include/parallelocr/Image.hpp
 
 jni/ParallelOCR/include/parallelocr/Letter.hpp:
@@ -219,9 +217,5 @@ jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp:
 jni/ParallelOCR/include/parallelocr/Player.hpp:
 
 jni/ParallelOCR/include/parallelocr/Coach.hpp:
-
-jni/ParallelOCR/include/parallelocr/RGB.hpp:
-
-jni/ParallelOCR/include/parallelocr/Pixel.hpp:
 
 jni/ParallelOCR/include/parallelocr/Image.hpp:

@@ -40,9 +40,9 @@ class Image {
             return this->_storedPixels;
         };
 
-        inline void setPixels(Pixel *pixels){
+        /*inline void setPixels(Pixel *pixels){
             this->_pixels = pixels;
-        }
+        }*/
         inline void setStoredPixels(void *storedPixels){
             this->_storedPixels = storedPixels;
         }
@@ -116,8 +116,15 @@ class Image {
         void *_storedPixels;
         uint32_t _stride;
         unsigned int _letterCount;
-        Pixel *_pixels;
+        //Pixel *_pixels;
         Letter *_letters;
+
+
+
+        unsigned int *_r,*_g,*_b,*_label,*_checked;
+
+
+
 
 };
 }

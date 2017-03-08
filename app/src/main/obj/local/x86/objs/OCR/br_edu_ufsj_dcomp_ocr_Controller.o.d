@@ -71,8 +71,6 @@
   jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp \
   jni/ParallelOCR/include/parallelocr/Player.hpp \
   jni/ParallelOCR/include/parallelocr/Coach.hpp \
-  jni/ParallelOCR/include/parallelocr/RGB.hpp \
-  jni/ParallelOCR/include/parallelocr/Pixel.hpp \
   jni/ParallelOCR/include/parallelocr/Letter.hpp \
   jni/ParallelOCR/include/parallelocr/Image.hpp \
   jni/br_edu_ufsj_dcomp_ocr_Controller.h
@@ -218,10 +216,6 @@ jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp:
 jni/ParallelOCR/include/parallelocr/Player.hpp:
 
 jni/ParallelOCR/include/parallelocr/Coach.hpp:
-
-jni/ParallelOCR/include/parallelocr/RGB.hpp:
-
-jni/ParallelOCR/include/parallelocr/Pixel.hpp:
 
 jni/ParallelOCR/include/parallelocr/Letter.hpp:
 

@@ -15,9 +15,7 @@ LOCAL_CFLAGS := -Ofast -Wall -Wextra -Werror
 LOCAL_CPPFLAGS := -Ofast -Wall -Wextra -Werror -std=c++14 -fexceptions
 LOCAL_CPP_FEATURES += exceptions
 LOCAL_LDLIBS := -llog -ldl -ljnigraphics -landroid
-LOCAL_SRC_FILES := src/parallelocr/RGB.cpp \
-                   src/parallelocr/Pixel.cpp \
-		           src/parallelocr/Letter.cpp \
+LOCAL_SRC_FILES := src/parallelocr/Letter.cpp \
 		           src/parallelocr/Coach.cpp \
                    src/parallelocr/Image.cpp 
 include $(BUILD_SHARED_LIBRARY)
