@@ -314,7 +314,6 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                         __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Left: %d", this->_letters[this->getLetterCount()].getLeftLimit()+x);
                         __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Pos: %d - Label: %d", (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),this->_pixels[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+(this->_letters[this->getLetterCount()].getLeftLimit()+x)].getLabel());
                         */
-
                         this->_letters[this->getLetterCount()].setLabelElement(
                         (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),
                         this->_label[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))

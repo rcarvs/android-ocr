@@ -29,8 +29,7 @@ using namespace parallelocr;
     return false;
 }*/
 
-inline bool isInteger(const std::string & s)
-{
+inline bool isInteger(const std::string & s){
    if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false ;
 
    char * p ;
@@ -53,6 +52,7 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     auto task = std::make_unique<parallelme::Task>(program);
 
     task->addKernel("crossing");
+
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
             kernelHash["crossing"]
@@ -60,10 +60,10 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
                 ->setArg(1, widthBuffer)
                 ->setArg(2, ccountBuffer)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
+
     });
     runtime->submitTask(std::move(task));
     runtime->finish();
-
     ccountBuffer->copyTo(ccount);
     this->_crossingRotuleSize = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
@@ -71,7 +71,6 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
                 this->_crossingRotuleSize++;
         }
     }
-
     std::string stringRotule = "";
     this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
     int contLetters = 0;
