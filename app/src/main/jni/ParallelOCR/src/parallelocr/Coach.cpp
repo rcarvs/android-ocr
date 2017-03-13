@@ -6,8 +6,13 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
+#include <ctype.h>
 using namespace parallelocr;
+
+
 Coach::Coach(JNIEnv *env,jobject javaAssetManager){
+
+
     this->setEnv(env);
     this->setAssetManager(AAssetManager_fromJava(env, javaAssetManager));
     AAsset* openInfo = AAssetManager_open(this->getAssetManager(),"coach/data.txt",AASSET_MODE_BUFFER);
@@ -20,7 +25,24 @@ Coach::Coach(JNIEnv *env,jobject javaAssetManager){
     AAsset_read(openInfo, infoBuffer, infoLenght);
     infoBuffer[infoLenght] = 0;
     this->_file = infoBuffer;
-
+    //first i count the number
+    this->_dataSize = 0;
+    for(unsigned int i=0;i<infoLenght;i++){
+        if(isdigit(this->_file[i]) || isalpha(this->_file[i])){
+            this->_dataSize++;
+        }
+    }
+    this->_data = (unsigned int*) malloc(sizeof(unsigned int)*this->_dataSize);
+    int count =0;
+    for(unsigned int i=0;i<infoLenght;i++){
+        if(isdigit(this->_file[i])){
+            this->_data[count] = this->_file[i];
+            count++;
+        }else if(isalpha(this->_file[i])){
+            this->_data[count] = this->_file[i]-'0';
+            count++;
+        }
+    }
     /*char *explode;
     explode = strtok(infoBuffer,"\n");
     int countLines;

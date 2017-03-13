@@ -45,9 +45,12 @@ class Coach{
         }
         Player *_players;
         std::string _file;
+        unsigned int *_data;
+        unsigned int _dataSize;
     private:
         JNIEnv *_env;
         AAssetManager *_assetManager;
+
         unsigned int _playersCount;
 
 
