@@ -36,12 +36,15 @@ Coach::Coach(JNIEnv *env,jobject javaAssetManager){
     int count =0;
     for(unsigned int i=0;i<infoLenght;i++){
         if(isdigit(this->_file[i])){
-            this->_data[count] = this->_file[i];
+            this->_data[count] = this->_file[i]-'0';
             count++;
         }else if(isalpha(this->_file[i])){
             this->_data[count] = this->_file[i]-'0';
             count++;
         }
+    }
+    for(int i=0; i<count;i++){
+        __android_log_print(ANDROID_LOG_INFO, "Log Test", "%d",this->_data[i]);
     }
     /*char *explode;
     explode = strtok(infoBuffer,"\n");

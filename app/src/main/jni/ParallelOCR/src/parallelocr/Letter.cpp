@@ -54,11 +54,16 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     dataBuffer->setSource(coach->_data);
     auto dataSizeBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
     dataSizeBuffer->setSource(&coach->_dataSize);
+
+    auto heightBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*));
+    unsigned int height = (this->getDownLimit()-this->getUpLimit());
+    heightBuffer->setSource(&height);
+
     unsigned int result = 0;
-    auto letterResultBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
+    auto letterResultBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*));
     letterResultBuffer->setSource(&result);
-    unsigned int *rotule = (unsigned int*) malloc(sizeof(unsigned int)*coach->_dataSize);
-    auto rotuleBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int)*coach->_dataSize);
+    unsigned int *rotule = (unsigned int*) malloc(sizeof(unsigned int*)*coach->_dataSize);
+    auto rotuleBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*coach->_dataSize);
     rotuleBuffer->setSource(rotule);
     auto task = std::make_unique<parallelme::Task>(program);
 
@@ -75,7 +80,7 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
                 ->setArg(0, dataBuffer)
                 ->setArg(1, dataSizeBuffer)
                 ->setArg(2, ccountBuffer)
-                ->setArg(3, widthBuffer)
+                ->setArg(3, heightBuffer)
                 ->setArg(4, rotuleBuffer)
                 ->setArg(5, letterResultBuffer)
                 ->setWorkSize(1); //code is sequential
@@ -85,19 +90,17 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     ccountBuffer->copyTo(ccount);
     rotuleBuffer->copyTo(rotule);
     letterResultBuffer->copyTo(&result);
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ",result);
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",result);
     /*for(unsigned int i=0;i<coach->_dataSize;i++){
         __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ",rotule[i]);
     }*/
-
-
-
     this->_crossingRotuleSize = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
         if(ccount[(i+1)] != ccount[i]){
                 this->_crossingRotuleSize++;
         }
     }
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",this->_crossingRotuleSize++);
     std::string stringRotule = "";
     this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
     int contLetters = 0;
@@ -108,7 +111,6 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
             contLetters++;
         }
     }
-
 
     /*
      ______________________________________
