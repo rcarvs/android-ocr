@@ -9,7 +9,7 @@ __kernel void identification(
 	//first pass is normalize the trainData passing the normalized version to rotule
 	uint crossingRotuleSize = 0;
 	for(uint i=0;i<(changesSize[0]-1);i++){
-		if(changes[i] != changes[i+1]){
+		if(changes[i] != changes[(i+1)]){
 			rotule[crossingRotuleSize] = changes[i];
 			crossingRotuleSize++;
 		}	
@@ -17,29 +17,27 @@ __kernel void identification(
 	//second pass is compare the rotule with the trainData to see if will match with any letter
 	uint contRotules = 0;
 	uint letterofTime = 0;
-	for(uint i=0;i<dataSize[0];i++){
-		if(contRotules == 0){
-			letterofTime = trainData[i];
-			i++;
-			contRotules = trainData[i];
-			if(contRotules == crossingRotuleSize){
-				//if that to occur i need to compare each position of vector
-				uint equals = 1;
-				for(uint j=0;j<contRotules;j++){
-					if(trainData[i+j] != rotule[j]){
-						equals = 0;
-						break;
-					}
-				}
-				if(equals == 1){
-					result[0] = letterofTime;
+	for(uint i=0;i<dataSize[0];i++){		
+		letterofTime = trainData[i];
+		i++;
+		contRotules = trainData[i];
+		if(contRotules == crossingRotuleSize){
+			//if that to occur i need to compare each position of vector
+			uint equals = 1;
+			for(uint j=1;j<=contRotules;j++){
+				if(trainData[i+j] != rotule[j-1]){
+					equals = 0;
 					break;
 				}
-				
 			}
-			i += contRotules;
-			contRotules = 0;
+			if(equals == 1){
+				result[0] = letterofTime;
+				break;
+			}
+			
 		}
+		i += contRotules;
+		contRotules = 0;		
 	}	
 }
 __kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){															
