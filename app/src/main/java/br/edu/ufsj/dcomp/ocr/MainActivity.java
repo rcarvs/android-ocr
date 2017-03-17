@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            tv.setText("Processing...");
             controller.createLabels(image,tv);
-            imgView.setImageBitmap(image);
+            //imgView.setImageBitmap(image);
 
             }
         });

@@ -275,13 +275,13 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
             ____________________________________________________________
             */
             if(this->_letters[this->getLetterCount()].getDownLimit() != this->_letters[this->getLetterCount()].getUpLimit() && this->_letters[this->getLetterCount()].getRightLimit() != this->_letters[this->getLetterCount()].getLeftLimit()){
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
+                //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
 
                 //here I have the letters limits. Create a copy of matrix for send to buffer memory
                 //it can go to another thread
 
                 this->_letters[this->getLetterCount()].setLabels((unsigned  int*) malloc(sizeof(unsigned int)*(this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit())*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())));
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Test");
+
                 for(unsigned int y = 0;
                     y < (this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit());
                     y++){
@@ -304,7 +304,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 //now I have a letter in another vector and it's ready to be processed for feature extraction
                 //create the task in the crossing function
                 this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Test");
+
 
             }
             /*
