@@ -7,28 +7,6 @@
 
 using namespace parallelocr;
 
-/*bool Letter::letterIdentification(std::shared_ptr<Coach> coach){
-    for(unsigned int i =0;i< coach->getPlayersCount();i++){
-        //First compare the number of labels
-        //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%s - %d",coach->getPlayer(i)._letter,coach->getPlayer(i).getLabelsCount());
-        if(coach->getPlayer(i).getLabelsCount() == this->_crossingRotuleSize){
-            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "ENTROU AQUI");
-            //bool equals = true;
-            for(unsigned int j=0;j<this->_crossingRotuleSize;j++){
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Testeeee %d %d - %d",this->_crossingRotule[j],coach->getPlayer(i).getLabel(j),coach->getPlayer(i)._letter);
-            }
-            if(equals){
-                __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d Acertou ",coach->getPlayer(i)._letter);
-
-                //this->_letter[1] = coach->getPlayer(i)._letter[1];
-                return true;
-            }
-        }
-    }
-
-    return false;
-}*/
-
 inline bool isInteger(const std::string & s){
    if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false ;
 
@@ -88,54 +66,12 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     runtime->submitTask(std::move(task));
     runtime->finish();
     ccountBuffer->copyTo(ccount);
-    //rotuleBuffer->copyTo(rotule);
     letterResultBuffer->copyTo(&result);
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Resultado", "%c ",coach->_alfabhet[result-17]);
-
-    /*for(unsigned int i=0;i<coach->_dataSize;i++){
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ",rotule[i]);
-    }*/
-    /*this->_crossingRotuleSize = 0;
-    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
-        if(ccount[(i+1)] != ccount[i]){
-                this->_crossingRotuleSize++;
-        }
-    }
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",this->_crossingRotuleSize++);*/
-    /*std::string stringRotule = "";
-    this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
-    int contLetters = 0;
-    for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
-        if(ccount[(i+1)] != ccount[i]){
-            stringRotule = stringRotule+" "+std::to_string(ccount[i]);
-            this->_crossingRotule[contLetters] = ccount[i];
-            contLetters++;
-        }
-    }*/
-
-    /*
-     ______________________________________
-    | implements here the recognition phase|
-     --------------------------------------
-    */
-    /*__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp FDP", "Chegou aqui");
-    unsigned int pos = coach->_file.find(stringRotule);
-    if(pos!=std::string::npos){
-        if(!isInteger(coach->_file.substr((pos-3),1))){
-            this->_letter = coach->_file.substr((pos-3),1);
-            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%s",coach->_file.substr((pos-3),1).c_str());
-        }else{
-            this->_letter = "";
-        }
+    if((result-17) <= 26){
+        this->_letter = coach->_alfabhet[result-17];
     }else{
         this->_letter = "";
     }
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp FDP", "Chegou aqui");
-
-
-    //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%s - %s",stringRotule.c_str(),coach->_file.c_str());
-*/
-
     /*bool train = false;
 
     if(train){

@@ -70,7 +70,6 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cmath \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/math.h \
   jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp \
-  jni/ParallelOCR/include/parallelocr/Player.hpp \
   jni/ParallelOCR/include/parallelocr/Coach.hpp \
   jni/ParallelOCR/include/parallelocr/Image.hpp
 
@@ -213,8 +212,6 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/math.h:
 
 jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp:
-
-jni/ParallelOCR/include/parallelocr/Player.hpp:
 
 jni/ParallelOCR/include/parallelocr/Coach.hpp:
 

@@ -5,11 +5,11 @@
  *  |_| /_/ |_|_|\_\/_/ |_/____/___/___/____/ /_/  /_/____/
  *
  */
+
 #include <parallelme/SchedulerFCFS.hpp>
 #include <parallelme/Device.hpp>
 #include <parallelme/Program.hpp>
 #include <parallelme/Task.hpp>
-#include <android/log.h>
 using namespace parallelme;
 
 void SchedulerFCFS::push(std::unique_ptr<Task> task){
@@ -24,10 +24,9 @@ std::unique_ptr<Task> SchedulerFCFS::pop(Device &device){
             && _taskList.front()->program().hasDeviceID(device.id())) {
         std::unique_ptr<Task> retTask = std::move(_taskList.front());
         _taskList.pop_front();
-
         return retTask;
-    } else {
-
+    }
+    else {
         _cv.notify_all();
         return nullptr;
     }

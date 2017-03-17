@@ -2,7 +2,6 @@
   jni/ParallelOCR/src/parallelocr/Coach.cpp \
   jni/ParallelOCR/include/parallelocr/Coach.hpp \
   jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp \
-  jni/ParallelOCR/include/parallelocr/Player.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/iosfwd \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/wchar.h \
@@ -77,8 +76,6 @@
 jni/ParallelOCR/include/parallelocr/Coach.hpp:
 
 jni/ParallelOCR/include/parallelocr/ParallelOCR.hpp:
-
-jni/ParallelOCR/include/parallelocr/Player.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string:
 

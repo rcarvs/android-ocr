@@ -10,7 +10,6 @@
 #include <parallelme/Task.hpp>
 #include "Worker.hpp"
 #include "dynloader/dynLoader.h"
-#include <android/log.h>
 using namespace parallelme;
 
 Runtime::~Runtime() = default;
@@ -35,8 +34,6 @@ void Runtime::loadDevices() {
         throw RuntimeConstructionError(std::to_string(err));
 
     // Initialize the devices for each platform.
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "O dispositivo possui %d plataforma(s).",numPlatforms);
-    unsigned int totalDevices = 0;
     for(unsigned i = 0; i < numPlatforms; ++i) {
         unsigned numDevices;
         err = clGetDeviceIDs(platforms[i], CL_DEVICE_TYPE_ALL, 0, nullptr,
@@ -49,11 +46,11 @@ void Runtime::loadDevices() {
                 devices.get(), nullptr);
         if(err < 0)
             throw RuntimeConstructionError(std::to_string(err));
-        totalDevices += numDevices;
+
         for(unsigned j = 0; j < numDevices; ++j)
             _devices.push_back(std::make_shared<Device>(devices[j]));
     }
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "O dispositivo possui %d device(s).",totalDevices);
+
 }
 
 void Runtime::startWorkers(JavaVM *jvm) {

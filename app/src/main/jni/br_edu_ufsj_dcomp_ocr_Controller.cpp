@@ -127,9 +127,9 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
 
     //for print phrase
     std::string phrase = "";
-    /*for(unsigned int i = 0;i<image.getLetterCount();i++){
+    for(unsigned int i = 0;i<image.getLetterCount();i++){
         phrase = phrase+image.getLetter(i)._letter;
-    }*/
+    }
 
 
     jstring result = (*env).NewStringUTF(phrase.c_str());

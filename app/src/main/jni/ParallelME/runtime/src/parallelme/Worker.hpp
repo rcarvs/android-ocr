@@ -17,7 +17,6 @@
 #include <parallelme/Device.hpp>
 #include <parallelme/Kernel.hpp>
 #include <parallelme/Task.hpp>
-#include <android/log.h>
 
 namespace parallelme {
 class Device;
@@ -61,8 +60,6 @@ public:
         _cv.notify_one();
     }
 
-
-
     /**
      * Starts the worker. If the worker has already started this function does
      * nothing.
@@ -84,11 +81,10 @@ public:
                     throw std::runtime_error("failed to attach thread to JVM.");
                 _device->setJNIEnv(env);
             }
-            _device->setJNIEnv(env);
+
             std::unique_lock<std::mutex> lock(_mutex);
 
             for(;;) {
-
                 auto task = scheduler->pop(*_device);
 
                 if(task) {
@@ -99,14 +95,12 @@ public:
                     return;
 
                 _cv.wait(lock);
-
             }
 
             if(jvm)
                 jvm->DetachCurrentThread();
         });
         t.detach();
-
     }
 
     /// Waits for the worker to finish.

@@ -116,6 +116,7 @@ static int openLibrary() {
     if((clLib = dlopen("/system/vendor/lib/libPVROCL.so", RTLD_LAZY))) return 1;
     if((clLib = dlopen("/usr/lib64/libOpenCL.so", RTLD_LAZY))) return 1;
     if((clLib = dlopen("/usr/lib/libOpenCL.so", RTLD_LAZY))) return 1;
+    if((clLib = dlopen("/usr/lib/x86_64-linux-gnu/libOpenCL.so", RTLD_LAZY))) return 1; //Renan: line added to adapt to my computer
     if((clLib = dlopen("libOpenCL.so", RTLD_LAZY))) return 1;
 
     return 0;

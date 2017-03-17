@@ -11,7 +11,6 @@
 #include <parallelme/Kernel.hpp>
 #include <parallelme/Program.hpp>
 #include "util/error.h"
-#include <android/log.h>
 using namespace parallelme;
 
 Task::Task(std::shared_ptr<Program> program, Score score) : _score(score),

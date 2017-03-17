@@ -25,25 +25,11 @@ class Coach{
         inline AAssetManager* getAssetManager(){
             return this->_assetManager;
         }
-        inline Player getPlayer(int index){
-            return this->_players[index];
-        }
-        inline Player* getPlayers(){
-            return this->_players;
-        }
-        inline void setPlayers(Player *players){
-            this->_players = players;
-        }
+
         inline void setAssetManager(AAssetManager *assetManager){
             this->_assetManager = assetManager;
         }
-        inline void setPlayersCount(unsigned int playersCount){
-            this->_playersCount = playersCount;
-        }
-        inline unsigned int getPlayersCount(){
-            return this->_playersCount;
-        }
-        Player *_players;
+
         std::string _file;
         unsigned int *_data;
         unsigned int _dataSize;
@@ -52,7 +38,7 @@ class Coach{
         JNIEnv *_env;
         AAssetManager *_assetManager;
 
-        unsigned int _playersCount;
+
 
 
 

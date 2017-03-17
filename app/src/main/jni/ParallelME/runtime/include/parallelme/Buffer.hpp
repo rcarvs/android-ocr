@@ -88,8 +88,8 @@ public:
         /// Array that stores the size in bytes of each java type.
         static const size_t TypeSizes[16] = {
             1, 2, 4, 4,         // byte, byte2, byte4 and rgba
-            2, 4, 8, 2, 4, 8,   // char,char2,char4,short,short2 and short4
-            4, 8, 16, 4, 8, 16  // int,int2,int4,float,float2 and float4
+            2, 4, 8, 2, 4, 8,   // char and short
+            4, 8, 16, 4, 8, 16  // int and float
         };
 
         return numElements * TypeSizes[type];

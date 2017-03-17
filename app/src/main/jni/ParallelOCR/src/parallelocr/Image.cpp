@@ -5,7 +5,7 @@
 
 #include <parallelocr/Image.hpp>
 #include <android/log.h>
-
+#include <time.h>
 
 using namespace parallelocr;
 
@@ -58,8 +58,12 @@ void Image::bitmapTransformBlackAndWhite(){
             ->setArg(5, checkedBuffer)
             ->setWorkSize((this->getWidth()*this->getHeight()));
     });
+    clock_t begin = clock();
     this->getRuntime()->submitTask(std::move(task));
     this->getRuntime()->finish();
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Time", "%f ", time_spent);
     bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap());
     rBuffer->copyTo(this->_r);
     gBuffer->copyTo(this->_g);
@@ -67,31 +71,8 @@ void Image::bitmapTransformBlackAndWhite(){
     labelBuffer->copyTo(this->_label);
     checkedBuffer->copyTo(this->_checked);
 
-    /*for(unsigned int i=0;i < (this->getWidth()*this->getHeight());i++){
-        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d", this->_r[i],this->_g[i],this->_b[i]);
-    }*/
 
 }
-/*
- ________________________________________
- |   Criar uma task para fazer isso     |
- ----------------------------------------
-*/
-
-/*void Image::extractPixelsRGB(){
-    uint32_t* line;
-    this->setPixels((Pixel*) malloc(sizeof(Pixel)*(this->getHeight()*this->getWidth())));
-    for(unsigned int y=0;y<this->getHeight();y++){
-        line = (uint32_t*) this->getStoredPixels();
-        for(unsigned int x=0;x<this->getWidth();x++){
-            RGB rgb(line[x]);
-            Pixel pixel(rgb);
-            this->_pixels[(y*this->getHeight())+x] = pixel;
-        }
-        this->setStoredPixels((char*)this->getStoredPixels() + this->getStride());
-    }
-}*/
-
 
 unsigned int Image::createDumblyLabels(){
     int upLabel = 0;
