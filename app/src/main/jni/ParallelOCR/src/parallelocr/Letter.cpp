@@ -40,13 +40,13 @@ inline bool isInteger(const std::string & s){
 
 void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_ptr<parallelme::Program> program,std::shared_ptr<Coach> coach){
 
-    auto labelsBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*(this->getDownLimit()-this->getUpLimit())*(this->getRightLimit()-this->getLeftLimit()));
+    auto labelsBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit())*(this->getRightLimit()-this->getLeftLimit()));
     labelsBuffer->setSource(this->getLabels());
-    auto widthBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*));
+    auto widthBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
     unsigned int width = (this->getRightLimit()-this->getLeftLimit());
     widthBuffer->setSource(&width);
-    auto ccountBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*(this->getDownLimit()-this->getUpLimit()));
-    unsigned int *ccount = (unsigned int*) malloc(sizeof(unsigned int*)*(this->getDownLimit()-this->getUpLimit()));
+    auto ccountBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit()));
+    unsigned int *ccount = (unsigned int*) malloc(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit()));
     ccountBuffer->setSource(ccount);
 
 
@@ -55,15 +55,15 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     auto dataSizeBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
     dataSizeBuffer->setSource(&coach->_dataSize);
 
-    auto heightBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*));
+    auto heightBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
     unsigned int height = (this->getDownLimit()-this->getUpLimit());
     heightBuffer->setSource(&height);
 
     unsigned int result = 0;
-    auto letterResultBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*));
+    auto letterResultBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int));
     letterResultBuffer->setSource(&result);
-    unsigned int *rotule = (unsigned int*) malloc(sizeof(unsigned int*)*coach->_dataSize);
-    auto rotuleBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*coach->_dataSize);
+    unsigned int *rotule = (unsigned int*) malloc(sizeof(unsigned int)*coach->_dataSize);
+    auto rotuleBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int)*coach->_dataSize);
     rotuleBuffer->setSource(rotule);
     auto task = std::make_unique<parallelme::Task>(program);
 
@@ -88,20 +88,21 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     runtime->submitTask(std::move(task));
     runtime->finish();
     ccountBuffer->copyTo(ccount);
-    rotuleBuffer->copyTo(rotule);
+    //rotuleBuffer->copyTo(rotule);
     letterResultBuffer->copyTo(&result);
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",result);
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Resultado", "%c ",coach->_alfabhet[result-17]);
+
     /*for(unsigned int i=0;i<coach->_dataSize;i++){
         __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d ",rotule[i]);
     }*/
-    this->_crossingRotuleSize = 0;
+    /*this->_crossingRotuleSize = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
         if(ccount[(i+1)] != ccount[i]){
                 this->_crossingRotuleSize++;
         }
     }
-    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",this->_crossingRotuleSize++);
-    std::string stringRotule = "";
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp Size", "%d ",this->_crossingRotuleSize++);*/
+    /*std::string stringRotule = "";
     this->_crossingRotule = (unsigned int*) malloc(sizeof(unsigned int*)*this->_crossingRotuleSize);
     int contLetters = 0;
     for(unsigned int i=0; i<(this->getDownLimit()-this->getUpLimit()-1);i++){
@@ -110,13 +111,14 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
             this->_crossingRotule[contLetters] = ccount[i];
             contLetters++;
         }
-    }
+    }*/
 
     /*
      ______________________________________
     | implements here the recognition phase|
      --------------------------------------
     */
+    /*__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp FDP", "Chegou aqui");
     unsigned int pos = coach->_file.find(stringRotule);
     if(pos!=std::string::npos){
         if(!isInteger(coach->_file.substr((pos-3),1))){
@@ -128,17 +130,16 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     }else{
         this->_letter = "";
     }
+    __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp FDP", "Chegou aqui");
 
 
     //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%s - %s",stringRotule.c_str(),coach->_file.c_str());
+*/
 
-
-    bool train = false;
+    /*bool train = false;
 
     if(train){
-        /*
-            The training will to be stored in sdcard/traindata.txt
-        */
+
         char trainchar[2] = "Q";
         FILE *trainfile = fopen("sdcard/traindata2.txt","a");
         fprintf(trainfile,"%s ",trainchar);
@@ -147,7 +148,7 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
         }
         fprintf(trainfile,"\n");
         fclose(trainfile);
-    }
+    }*/
 
 
 }

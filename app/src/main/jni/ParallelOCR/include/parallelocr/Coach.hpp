@@ -47,6 +47,7 @@ class Coach{
         std::string _file;
         unsigned int *_data;
         unsigned int _dataSize;
+        char _alfabhet[26] ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','K','R','S','T','U','V','W','X','Y','Z'};
     private:
         JNIEnv *_env;
         AAssetManager *_assetManager;

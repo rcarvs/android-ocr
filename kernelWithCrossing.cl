@@ -1,45 +1,47 @@
-__kernel void identification(
-	__global uint *trainData,
-	__global uint *dataSize,
-	__global uint *changes,
-	__global uint *changesSize,
-	__global uint *rotule,
-	__global uint *result){
-
-	//first pass is normalize the trainData passing the normalized version to rotule
-	uint crossingRotuleSize = 0;
-	for(uint i=0;i<(changesSize[0]-1);i++){
-		if(changes[i] != changes[(i+1)]){
-			rotule[crossingRotuleSize] = changes[i];
-			crossingRotuleSize++;
-		}	
-	}
-	//second pass is compare the rotule with the trainData to see if will match with any letter
-	uint contRotules = 0;
-	uint letterofTime = 0;
-	for(uint i=0;i<dataSize[0];i++){		
-		letterofTime = trainData[i];
-		i++;
-		contRotules = trainData[i];
-		if(contRotules == crossingRotuleSize){
-			//if that to occur i need to compare each position of vector
-			uint equals = 1;
-			for(uint j=1;j<=contRotules;j++){
-				if(trainData[i+j] != rotule[j-1]){
-					equals = 0;
-					break;
-				}
-			}
-			if(equals == 1){
-				result[0] = letterofTime;
-				break;
-			}
-			
-		}
-		i += contRotules;
-		contRotules = 0;		
-	}	
-}
+"__kernel void identification(\n"
+"	__global uint *trainData,\n"
+"	__global uint *dataSize,\n"
+"	__global uint *changes,\n"
+"	__global uint *changesSize,\n"
+"	__global uint *rotule,\n"
+"	__global uint *result){\n"
+"\n"
+"	//first pass is normalize the trainData passing the normalized version to rotule\n"
+"	uint crossingRotuleSize = 0;\n"
+"	for(uint i=0;i<(changesSize[0]-1);i++){\n"
+"		if(changes[i] != changes[(i+1)]){\n"
+"			rotule[crossingRotuleSize] = changes[i];\n"
+"			crossingRotuleSize++;\n"
+"		}	\n"
+"	}\n"
+"	//second pass is compare the rotule with the trainData to see if will match with any letter\n"
+"	uint i = 0;\n"
+"	uint letter;\n"
+"	uint quantity;\n"
+"	while(i < dataSize[0]){\n"
+"		letter = trainData[i];\n"
+"		i++;\n"
+"		quantity = trainData[i];\n"
+"		i++;\n"
+"		uint j = 0;		\n"
+"		uint isFinded = 1;\n"
+"		if(quantity == crossingRotuleSize){\n"
+"			while(j < quantity && j < crossingRotuleSize){\n"
+"				if(trainData[i+j] != rotule[j]){\n"
+"					isFinded = 0;\n"
+"					break;\n"
+"				}\n"
+"				j++;\n"
+"			}\n"
+"			if(isFinded == 1){\n"
+"				result[0] = letter;\n"
+"				break;\n"
+"			}\n"
+"		}		\n"
+"		i += quantity;\n"
+"		\n"
+"	}\n"
+"}\n"
 __kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){															
 	uint id = get_global_id(0);														        														
 	uint changes = 0;																        														

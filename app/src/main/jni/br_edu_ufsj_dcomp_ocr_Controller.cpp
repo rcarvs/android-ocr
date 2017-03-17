@@ -31,30 +31,32 @@ const static char gKernels[] =
 "		}	\n"
 "	}\n"
 "	//second pass is compare the rotule with the trainData to see if will match with any letter\n"
-"	uint contRotules = 0;\n"
-"	uint letterofTime = 0;\n"
-"	for(uint i=0;i<dataSize[0];i++){		\n"
-"		letterofTime = trainData[i];\n"
+"	uint i = 0;\n"
+"	uint letter;\n"
+"	uint quantity;\n"
+"	while(i < dataSize[0]){\n"
+"		letter = trainData[i];\n"
 "		i++;\n"
-"		contRotules = trainData[i];\n"
-"		if(contRotules == crossingRotuleSize){\n"
-"			//if that to occur i need to compare each position of vector\n"
-"			uint equals = 1;\n"
-"			for(uint j=1;j<=contRotules;j++){\n"
-"				if(trainData[i+j] != rotule[(j-1)]){\n"
-"					equals = 0;\n"
+"		quantity = trainData[i];\n"
+"		i++;\n"
+"		uint j = 0;		\n"
+"		uint isFinded = 1;\n"
+"		if(quantity == crossingRotuleSize){\n"
+"			while(j < quantity && j < crossingRotuleSize){\n"
+"				if(trainData[i+j] != rotule[j]){\n"
+"					isFinded = 0;\n"
 "					break;\n"
 "				}\n"
+"				j++;\n"
 "			}\n"
-"			if(equals == 1){\n"
-"				result[0] = letterofTime;\n"
+"			if(isFinded == 1){\n"
+"				result[0] = letter;\n"
 "				break;\n"
 "			}\n"
-"			\n"
-"		}\n"
-"		i += contRotules;\n"
-"		contRotules = 0;		\n"
-"	}	\n"
+"		}		\n"
+"		i += quantity;\n"
+"		\n"
+"	}\n"
 "}\n"
 "__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){																\n"
 "	uint id = get_global_id(0);														        															\n"
@@ -125,9 +127,9 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
 
     //for print phrase
     std::string phrase = "";
-    for(unsigned int i = 0;i<image.getLetterCount();i++){
+    /*for(unsigned int i = 0;i<image.getLetterCount();i++){
         phrase = phrase+image.getLetter(i)._letter;
-    }
+    }*/
 
 
     jstring result = (*env).NewStringUTF(phrase.c_str());
