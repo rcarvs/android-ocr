@@ -1,0 +1,99 @@
+Evaluation Time: Program Initialization: 0.383843
+Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000028
+Evaluation Time: Task blackAndWhite - Task Configuration: 0.000045
+Evaluation Time: Task blackAndWhite - Task submition: 0.000032
+Evaluation Time: Task blackAndWhite - Runtime Finish: 1.481446
+Evaluation Time: Task blackAndWhite - Result Data Copy: 1.749089
+Evaluation Time: Cpp Create Dumbly Labels: 0.462654
+Evaluation Time: Matrix Letters Search - Sum : 1.056163
+Evaluation Time: Matrix Letters Search - Mean : 0.002640
+Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.004502
+Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.007508
+Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.184654
+Evaluation Time: Task evaluation_and_crossing - Sum Finish: 1.587031
+Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.036196
+Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000011
+Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000019
+Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000462
+Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.003968
+Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000090
+
+Evaluation Time: Program Initialization: 0.219194
+Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000030
+Evaluation Time: Task blackAndWhite - Task Configuration: 0.000042
+Evaluation Time: Task blackAndWhite - Task submition: 0.000053
+Evaluation Time: Task blackAndWhite - Runtime Finish: 1.144460
+Evaluation Time: Task blackAndWhite - Result Data Copy: 1.582086
+Evaluation Time: Cpp Create Dumbly Labels: 0.459543
+Evaluation Time: Matrix Letters Search - Sum : 0.997583
+Evaluation Time: Matrix Letters Search - Mean : 0.002494
+Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.004090
+Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.007533
+Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.230814
+Evaluation Time: Task evaluation_and_crossing - Sum Finish: 1.487587
+Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.036807
+Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000010
+Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000019
+Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000577
+Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.003719
+Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000092
+
+Evaluation Time: Program Initialization: 0.214054
+Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000029
+Evaluation Time: Task blackAndWhite - Task Configuration: 0.000040
+Evaluation Time: Task blackAndWhite - Task submition: 0.000040
+Evaluation Time: Task blackAndWhite - Runtime Finish: 1.216277
+Evaluation Time: Task blackAndWhite - Result Data Copy: 1.536431
+Evaluation Time: Cpp Create Dumbly Labels: 0.467704
+Evaluation Time: Matrix Letters Search - Sum : 1.005056
+Evaluation Time: Matrix Letters Search - Mean : 0.002513
+Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.004614
+Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.007873
+Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.229727
+Evaluation Time: Task evaluation_and_crossing - Sum Finish: 1.478082
+Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.037658
+Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000012
+Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000020
+Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000574
+Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.003695
+Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000094
+
+Evaluation Time: Program Initialization: 0.217659
+Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000034
+Evaluation Time: Task blackAndWhite - Task Configuration: 0.000040
+Evaluation Time: Task blackAndWhite - Task submition: 0.000024
+Evaluation Time: Task blackAndWhite - Runtime Finish: 1.258395
+Evaluation Time: Task blackAndWhite - Result Data Copy: 1.514857
+Evaluation Time: Cpp Create Dumbly Labels: 0.456509
+Evaluation Time: Matrix Letters Search - Sum : 1.024130
+Evaluation Time: Matrix Letters Search - Mean : 0.002560
+Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.003823
+Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.007291
+Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.167996
+Evaluation Time: Task evaluation_and_crossing - Sum Finish: 1.555603
+Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.032576
+Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000010
+Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000018
+Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000420
+Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.003889
+Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000081
+
+Evaluation Time: Program Initialization: 0.221729
+Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000041
+Evaluation Time: Task blackAndWhite - Task Configuration: 0.000045
+Evaluation Time: Task blackAndWhite - Task submition: 0.000027
+Evaluation Time: Task blackAndWhite - Runtime Finish: 1.189924
+Evaluation Time: Task blackAndWhite - Result Data Copy: 1.521969
+Evaluation Time: Cpp Create Dumbly Labels: 0.463108
+Evaluation Time: Matrix Letters Search - Sum : 1.034808
+Evaluation Time: Matrix Letters Search - Mean : 0.002587
+Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.003885
+Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.007168
+Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.110389
+Evaluation Time: Task evaluation_and_crossing - Sum Finish: 1.592932
+Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.033761
+Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000010
+Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000018
+Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000276
+Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.003982
+Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000084
