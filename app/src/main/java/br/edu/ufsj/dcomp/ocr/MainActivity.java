@@ -1,7 +1,6 @@
 package br.edu.ufsj.dcomp.ocr;
 
 
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.quinhentos_quinhentos_cem);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
 

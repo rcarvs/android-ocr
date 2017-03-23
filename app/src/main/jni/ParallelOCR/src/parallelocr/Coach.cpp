@@ -11,8 +11,6 @@ using namespace parallelocr;
 
 
 Coach::Coach(JNIEnv *env,jobject javaAssetManager){
-
-
     this->setEnv(env);
     this->setAssetManager(AAssetManager_fromJava(env, javaAssetManager));
     AAsset* openInfo = AAssetManager_open(this->getAssetManager(),"coach/data.txt",AASSET_MODE_BUFFER);

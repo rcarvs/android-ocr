@@ -8,6 +8,7 @@
 #include <parallelme/ParallelME.hpp>
 #include <parallelocr/ParallelOCR.hpp>
 #include "br_edu_ufsj_dcomp_ocr_Controller.h"
+#include <time.h>
 
 using namespace parallelme;
 using namespace parallelocr;
@@ -90,6 +91,7 @@ struct NativeData{
 
 
 JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv *env, jobject self, jobject javaAssetManager) {
+    clock_t begin = clock();
     JavaVM *jvm;
     env->GetJavaVM(&jvm);
     if(!jvm) return (jlong) nullptr;
@@ -98,7 +100,9 @@ JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv 
     dataPointer->coach = std::make_shared<Coach>(env,javaAssetManager);
     dataPointer->runtime = std::make_shared<Runtime>(jvm,std::make_shared<SchedulerFCFS>());
     dataPointer->program = std::make_shared<Program>(dataPointer->runtime, gKernels);
-
+    clock_t end = clock();
+    double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Program Initialization: %f",elapsed_secs);
     return (jlong) dataPointer;
 }
 

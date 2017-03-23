@@ -34,14 +34,20 @@ class Coach{
         unsigned int *_data;
         unsigned int _dataSize;
         char _alfabhet[26] ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','K','R','S','T','U','V','W','X','Y','Z'};
+
+        //Evaluation
+        unsigned int _count_evaluation = 0;
+        unsigned int _count_labels = 0;
+        double *_searchLetter;
+        double *_buffers;
+        double *_tasks;
+        double *_submission;
+        double *_finish;
+        double *_result;
+
     private:
         JNIEnv *_env;
         AAssetManager *_assetManager;
-
-
-
-
-
 
 };
 }
