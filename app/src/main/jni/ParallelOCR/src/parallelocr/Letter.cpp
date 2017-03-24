@@ -52,7 +52,10 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     auto task = std::make_unique<parallelme::Task>(program);
 
     task->addKernel("crossing");
-    task->addKernel("identification");
+    task->addKernel("identification1");
+
+
+
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
             kernelHash["crossing"]
@@ -60,7 +63,7 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
                 ->setArg(1, widthBuffer)
                 ->setArg(2, ccountBuffer)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
-            kernelHash["identification"]
+            kernelHash["identification1"]
                 ->setArg(0, dataBuffer)
                 ->setArg(1, dataSizeBuffer)
                 ->setArg(2, ccountBuffer)

@@ -59,6 +59,8 @@ const static char gKernels[] =
 "		\n"
 "	}\n"
 "}\n"
+"\n"
+"__kernel void identification1(__global uint *trainData,__global uint *dataSize,__global uint *changes,__global uint *changesSize,__global uint *rotule,__global uint *result){	identification(trainData,dataSize,changes,changesSize,rotule,result); }\n"
 "__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){																\n"
 "	uint id = get_global_id(0);														        															\n"
 "	uint changes = 0;																        															\n"
@@ -80,9 +82,8 @@ const static char gKernels[] =
 "    	r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 0;                        																\n"
 "    }                                                          					        															\n"
 "    image[gid] = pixel;                                        					        															\n"
-"} 																																						\n";
-
-
+"} 																																						\n"
+"\n";
 struct NativeData{
     std::shared_ptr<Coach> coach;
     std::shared_ptr<Runtime> runtime;
