@@ -52,10 +52,11 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     auto task = std::make_unique<parallelme::Task>(program);
 
     task->addKernel("crossing");
-    task->addKernel("identification1");
-
-
-
+    /*for(int i=1;i<=50;i++){
+        std::string fname = "fe"+std::to_string(i);
+        task->addKernel(fname);
+    }*/
+    task->addKernel("identification");
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
             kernelHash["crossing"]
@@ -63,7 +64,16 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
                 ->setArg(1, widthBuffer)
                 ->setArg(2, ccountBuffer)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
-            kernelHash["identification1"]
+            /*for(int i=1;i<=100;i++){
+                std::string fname = "fe"+std::to_string(i);
+                kernelHash[fname]
+                ->setArg(0, labelsBuffer)
+                ->setArg(1, widthBuffer)
+                ->setArg(2, ccountBuffer)
+                ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
+            }*/
+
+kernelHash["identification"]
                 ->setArg(0, dataBuffer)
                 ->setArg(1, dataSizeBuffer)
                 ->setArg(2, ccountBuffer)
@@ -77,6 +87,7 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     coach->_tasks[coach->_count_evaluation] = elapsed_secs;
     begin = clock();
     runtime->submitTask(std::move(task));
+
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     coach->_submission[coach->_count_evaluation] = elapsed_secs;
