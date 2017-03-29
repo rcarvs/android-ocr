@@ -91,6 +91,9 @@ struct NativeData{
     std::shared_ptr<Coach> coach;
     std::shared_ptr<Runtime> runtime;
     std::shared_ptr<Program> program;
+    double start_time;
+    clock_t begin;
+    clock_t end;
 };
 
 
@@ -101,25 +104,29 @@ JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv 
     if(!jvm) return (jlong) nullptr;
 
     auto dataPointer = new NativeData();
+    dataPointer->begin = clock();
     dataPointer->coach = std::make_shared<Coach>(env,javaAssetManager);
     dataPointer->runtime = std::make_shared<Runtime>(jvm,std::make_shared<SchedulerFCFS>());
     dataPointer->program = std::make_shared<Program>(dataPointer->runtime, gKernels);
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    dataPointer->start_time = elapsed_secs;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Program Initialization: %f",elapsed_secs);
+
     return (jlong) dataPointer;
 }
 
 
 
 JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerLong,jobject bitmap,jobject textViewOutOut){
+    auto dataPointer = (NativeData *) dataPointerLong;
+    dataPointer->begin = clock();
     jclass clazz = (*env).FindClass("android/widget/TextView");
     jmethodID setText = (*env).GetMethodID(clazz, "setText", "(Ljava/lang/CharSequence;)V");
     //Initialize image class with pointer to image
 
-    Image image(env,&bitmap);
     //Set the runtime e program objects in Image class
-    auto dataPointer = (NativeData *) dataPointerLong;
+    Image image(env,&bitmap);
     image.setCoach(dataPointer->coach);
     image.setRuntime(dataPointer->runtime);
     image.setProgram(dataPointer->program);
@@ -132,6 +139,10 @@ JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLa
     //why the feature extraction are in same function of labeling???
     //because the feature extraction is in matrix search time :D :D :D
     image.toLabel();
+    dataPointer->end = clock();
+
+    double elapsed_secs = double(dataPointer->end - dataPointer->begin) / CLOCKS_PER_SEC;
+    __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Program Total Time: %f",dataPointer->start_time+elapsed_secs);
 
     //for print phrase
     std::string phrase = "";
