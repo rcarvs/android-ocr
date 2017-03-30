@@ -69,7 +69,7 @@ const static char gKernels[] =
 "			if(letter[i] != letter[i+1]){												        															\n"
 "				changes++;																        															\n"
 "			}																			        															\n"
-"		}\n"
+"		}\n"-
 "	}									        															\n"
 "\n"
 "	ccount[id] = changes;											            															\n"
