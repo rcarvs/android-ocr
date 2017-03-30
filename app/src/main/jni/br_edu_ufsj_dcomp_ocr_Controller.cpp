@@ -63,7 +63,7 @@ const static char gKernels[] =
 "__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){																\n"
 "	uint id = get_global_id(0);														        															\n"
 "	uint changes = 0;\n"
-"	for (uint teste = 0;teste < 1;teste++){\n"
+"	for (uint teste = 0;teste < 10000;teste++){\n"
 "		changes = 0;																        															\n"
 "		for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){						        															\n"
 "			if(letter[i] != letter[i+1]){												        															\n"
@@ -115,8 +115,6 @@ JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv 
 
     return (jlong) dataPointer;
 }
-
-
 
 JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerLong,jobject bitmap,jobject textViewOutOut){
     auto dataPointer = (NativeData *) dataPointerLong;

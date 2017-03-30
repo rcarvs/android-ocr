@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         final Controller controller = new Controller();
         controller.startJniStructures(getAssets());
+        controller.createLabels(image,tv);
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            tv.setText("Processing...");
             controller.createLabels(image,tv);
             //imgView.setImageBitmap(image);
 
