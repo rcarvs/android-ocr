@@ -51,27 +51,28 @@ void Letter::crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_p
     begin = clock();
     auto task = std::make_unique<parallelme::Task>(program);
 
-    task->addKernel("crossing");
-    /*for(int i=1;i<=50;i++){
+    //task->addKernel("crossing");
+    for(int i=1;i<=1;i++){
         std::string fname = "fe"+std::to_string(i);
         task->addKernel(fname);
-    }*/
+    }
     task->addKernel("identification");
     task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
             device = device;
-            kernelHash["crossing"]
-                ->setArg(0, labelsBuffer)
-                ->setArg(1, widthBuffer)
-                ->setArg(2, ccountBuffer)
-                ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
-            /*for(int i=1;i<=100;i++){
+            for(int i=1;i<=1;i++){
                 std::string fname = "fe"+std::to_string(i);
                 kernelHash[fname]
                 ->setArg(0, labelsBuffer)
                 ->setArg(1, widthBuffer)
                 ->setArg(2, ccountBuffer)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()));
-            }*/
+            }
+            /*kernelHash["crossing"]
+                ->setArg(0, labelsBuffer)
+                ->setArg(1, widthBuffer)
+                ->setArg(2, ccountBuffer)
+                ->setWorkSize((this->getDownLimit()-this->getUpLimit()));*/
+
 
 kernelHash["identification"]
                 ->setArg(0, dataBuffer)
@@ -112,9 +113,6 @@ kernelHash["identification"]
     }else{
         this->_letter = "";
     }
-
-
-
     /*bool train = false;
 
     if(train){

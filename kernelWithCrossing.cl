@@ -6,7 +6,7 @@ __kernel void identification(
 	__global uint *rotule,
 	__global uint *result){
 
-	//first pass is normalize the trainData passing the normalized version to rotule
+	/*first pass is normalize the trainData passing the normalized version to rotule*/
 	uint crossingRotuleSize = 0;
 	for(uint i=0;i<(changesSize[0]-1);i++){
 		if(changes[i] != changes[(i+1)]){
@@ -14,7 +14,7 @@ __kernel void identification(
 			crossingRotuleSize++;
 		}	
 	}
-	//second pass is compare the rotule with the trainData to see if will match with any letter
+	/*second pass is compare the rotule with the trainData to see if will match with any letter*/
 	uint i = 0;
 	uint letter;
 	uint quantity;
@@ -46,7 +46,7 @@ __kernel void identification(
 __kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){																
 	uint id = get_global_id(0);														        															
 	uint changes = 0;
-	for (uint teste = 0;teste < 100000;teste++){
+	for (uint teste = 0;teste < 10000;teste++){
 		changes = 0;																        															
 		for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){						        															
 			if(letter[i] != letter[i+1]){												        															
@@ -55,7 +55,7 @@ __kernel void crossing(__global uint *letter,__global uint *width,__global uint 
 		}
 	}									        															
 
-	ccount[id] = changes;														            															
+	ccount[id] = changes;											            															
 }																					        															
 																					        															
 __kernel void blackandwhite(__global uchar4 *image,__global uint *r,__global uint *g,__global uint *b,__global uint *label,__global uint *checked) {   
@@ -68,5 +68,4 @@ __kernel void blackandwhite(__global uchar4 *image,__global uint *r,__global uin
     	r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 0;                        																
     }                                                          					        															
     image[gid] = pixel;                                        					        															
-"} 																																						
-"
+}
