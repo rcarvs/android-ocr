@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Image Size', 'BlackAndWhite ParallelME Task'],
+          ['100x100', (((0.000029+0.000057+0.000029+0.023996+0.013493)+(0.000055+0.000061+0.000036+0.027173+0.014413)+(0.000041+0.000055+0.000030+0.020045+0.013931))/3)],
+          ['500x500', (((0.000030+0.000041+0.000041+0.282848+0.408925)+(0.000030+0.000041+0.000041+0.282848+0.408925)+(0.000031+0.000041+0.000047+0.305884+0.383052))/3)],
+          ['1000x1000', (((0.000039+0.000060+0.000804+1.258832+1.562724)+(0.000015+0.000018+0.000034+1.116051+1.570150)+(0.000015+0.000017+0.000052+1.105884+1.509089))/3)],
+          ['1500x1500', (((0.000040+0.000052+0.000833+2.463655+3.381505)+(0.000017+0.000019+0.000028+2.866515+3.492497)+(0.000021+0.000030+0.000021+2.620293+3.344282))/3)],
+          ['2000x2000', (((0.000022+0.000039+0.004543+4.135078+6.268047)+(0.000026+0.000048+0.000023+4.171174+6.070466)+(0.000017+0.000012+0.000017+4.099440+6.264914))/3)]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Task evaluation blackAndWhite',
+            subtitle: 'Time in seconds for different image sizes',
+            vAxis: {format: 'decimal'},            
+          },          
+        };
+        
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        var chartDiv = document.getElementById("columnchart_material"); 
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart_material" style="width: 900px; height: 500px;"></div>
+  </body>
+</html>
+
