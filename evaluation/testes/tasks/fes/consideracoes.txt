@@ -1,0 +1,5 @@
+Considerações:
+Leve: 1x
+Media: 10x
+Pesada: 100x
+Extreme: 1000x

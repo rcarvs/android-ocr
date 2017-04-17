@@ -1,0 +1,20 @@
+Program Initialization: 0.330967
+Task blackAndWhite - Buffers Initialization: 0.000021
+Task blackAndWhite - Task Configuration: 0.000029
+Task blackAndWhite - Task submition: 0.000038
+Task blackAndWhite - Runtime Finish: 3.361266
+Task blackAndWhite - Result Data Copy: 2.216755
+Cpp Create Dumbly Labels: 1.141345
+Matrix Letters Search - Sum : 2.746628
+Matrix Letters Search - Mean : 0.002747
+Task evaluation_and_crossing - Sum Buffers: 0.012492
+Task evaluation_and_crossing - Sum Tasks: 0.033169
+Task evaluation_and_crossing - Sum Submission: 0.172765
+Task evaluation_and_crossing - Sum Finish: 1981.223690
+Task evaluation_and_crossing - Sum Result: 0.097385
+Task evaluation_and_crossing - Mean Buffers: 0.000012
+Task evaluation_and_crossing - Mean Tasks: 0.000033
+Task evaluation_and_crossing - Mean Submission: 0.000173
+Task evaluation_and_crossing - Mean Finish: 1.981224
+Task evaluation_and_crossing - Mean Result: 0.000097
+Program Total Time: 1993.044177

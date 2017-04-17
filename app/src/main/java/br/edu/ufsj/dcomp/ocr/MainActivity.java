@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste10);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
 
@@ -32,13 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         final Controller controller = new Controller();
         controller.startJniStructures(getAssets());
-        //controller.createLabels(image,tv);
+        controller.createLabels(image,tv);
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             controller.createLabels(image,tv);
             //imgView.setImageBitmap(image);
-
             }
         });
 
