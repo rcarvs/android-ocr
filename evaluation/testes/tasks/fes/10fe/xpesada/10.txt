@@ -1,0 +1,60 @@
+04-18 13:10:36.148 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Initialization: 1.340832
+04-18 13:10:36.148 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000012
+04-18 13:10:36.148 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task Configuration: 0.000032
+04-18 13:10:36.148 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task submition: 0.000024
+04-18 13:10:38.408 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Runtime Finish: 2.261080
+04-18 13:10:39.848 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Result Data Copy: 1.434660
+04-18 13:10:39.988 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Cpp Create Dumbly Labels: 0.113188
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Sum : 0.028594
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Mean : 0.002859
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.000096
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.000700
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.000364
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Finish: 4.052635
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.001084
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000010
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000070
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000036
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.405263
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000108
+04-18 13:10:44.138 32247-32247/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Total Time: 9.336540
+04-18 13:15:01.808 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Initialization: 1.022039
+04-18 13:15:01.808 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000013
+04-18 13:15:01.808 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task Configuration: 0.000032
+04-18 13:15:01.818 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task submition: 0.009342
+04-18 13:15:02.828 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Runtime Finish: 1.016490
+04-18 13:15:04.318 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Result Data Copy: 1.488220
+04-18 13:15:04.448 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Cpp Create Dumbly Labels: 0.109990
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Sum : 0.023640
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Mean : 0.002364
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.000130
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.000639
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.004791
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Finish: 4.040765
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.000843
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000013
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000064
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000479
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.404076
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000084
+04-18 13:15:08.588 5068-5068/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Total Time: 7.805225
+04-18 13:15:22.018 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Initialization: 1.019852
+04-18 13:15:22.018 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Buffers Initialization: 0.000012
+04-18 13:15:22.018 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task Configuration: 0.000025
+04-18 13:15:22.018 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Task submition: 0.000044
+04-18 13:15:23.278 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Runtime Finish: 1.252064
+04-18 13:15:24.758 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task blackAndWhite - Result Data Copy: 1.489354
+04-18 13:15:24.908 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Cpp Create Dumbly Labels: 0.114325
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Sum : 0.027344
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Matrix Letters Search - Mean : 0.002734
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Buffers: 0.000123
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Tasks: 0.000600
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Submission: 0.003614
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Finish: 4.056170
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Sum Result: 0.000952
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Buffers: 0.000012
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Tasks: 0.000060
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Submission: 0.000361
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Finish: 0.405617
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Task evaluation_and_crossing - Mean Result: 0.000095
+04-18 13:15:29.068 5389-5389/br.edu.ufsj.dcomp.opticalcharacterrecognitionparallel I/Evaluation Time: Program Total Time: 8.067918
