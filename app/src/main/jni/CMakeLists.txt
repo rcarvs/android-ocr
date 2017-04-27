@@ -4,33 +4,37 @@ project(jni)
 set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES
-    ParallelME/runtime/include/parallelme/Buffer.hpp
-    ParallelME/runtime/include/parallelme/Device.hpp
-    ParallelME/runtime/include/parallelme/Kernel.hpp
-    ParallelME/runtime/include/parallelme/ParallelME.hpp
-    ParallelME/runtime/include/parallelme/Program.hpp
-    ParallelME/runtime/include/parallelme/Runtime.hpp
-    ParallelME/runtime/include/parallelme/Scheduler.hpp
-    ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp
-    ParallelME/runtime/include/parallelme/SchedulerHEFT.hpp
-    ParallelME/runtime/include/parallelme/SchedulerPAMS.hpp
-    ParallelME/runtime/include/parallelme/Task.hpp
-    ParallelME/runtime/src/parallelme/dynloader/headers/cl.h
-    ParallelME/runtime/src/parallelme/dynloader/headers/cl_platform.h
-    ParallelME/runtime/src/parallelme/dynloader/dynLoader.c
-    ParallelME/runtime/src/parallelme/dynloader/dynLoader.h
-    ParallelME/runtime/src/parallelme/util/error.h
-    ParallelME/runtime/src/parallelme/util/platform.h
-    ParallelME/runtime/src/parallelme/Buffer.cpp
-    ParallelME/runtime/src/parallelme/Device.cpp
-    ParallelME/runtime/src/parallelme/Kernel.cpp
-    ParallelME/runtime/src/parallelme/Program.cpp
-    ParallelME/runtime/src/parallelme/Runtime.cpp
-    ParallelME/runtime/src/parallelme/SchedulerFCFS.cpp
-    ParallelME/runtime/src/parallelme/SchedulerHEFT.cpp
-    ParallelME/runtime/src/parallelme/SchedulerPAMS.cpp
-    ParallelME/runtime/src/parallelme/Task.cpp
-    ParallelME/runtime/src/parallelme/Worker.hpp
+    ParallelUS/runtime/include/parallelus/Buffer.hpp
+    ParallelUS/runtime/include/parallelus/Device.hpp
+    ParallelUS/runtime/include/parallelus/Kernel.hpp
+    ParallelUS/runtime/include/parallelus/NetworkManager.hpp
+    ParallelUS/runtime/include/parallelus/ParallelUS.hpp
+    ParallelUS/runtime/include/parallelus/Program.hpp
+    ParallelUS/runtime/include/parallelus/Runtime.hpp
+    ParallelUS/runtime/include/parallelus/Scheduler.hpp
+    ParallelUS/runtime/include/parallelus/SchedulerFCFS.hpp
+    ParallelUS/runtime/include/parallelus/SchedulerHEFT.hpp
+    ParallelUS/runtime/include/parallelus/SchedulerPAMS.hpp
+    ParallelUS/runtime/include/parallelus/Task.hpp
+    ParallelUS/runtime/src/parallelus/dynloader/headers/cl.h
+    ParallelUS/runtime/src/parallelus/dynloader/headers/cl_platform.h
+    ParallelUS/runtime/src/parallelus/dynloader/dynLoader.c
+    ParallelUS/runtime/src/parallelus/dynloader/dynLoader.h
+    ParallelUS/runtime/src/parallelus/util/error.h
+    ParallelUS/runtime/src/parallelus/util/platform.h
+    ParallelUS/runtime/src/parallelus/Buffer.cpp
+    ParallelUS/runtime/src/parallelus/Device.cpp
+    ParallelUS/runtime/src/parallelus/Kernel.cpp
+    ParallelUS/runtime/src/parallelus/Network.hpp
+    ParallelUS/runtime/src/parallelus/NetWorker.hpp
+    ParallelUS/runtime/src/parallelus/NetworkManager.cpp
+    ParallelUS/runtime/src/parallelus/Program.cpp
+    ParallelUS/runtime/src/parallelus/Runtime.cpp
+    ParallelUS/runtime/src/parallelus/SchedulerFCFS.cpp
+    ParallelUS/runtime/src/parallelus/SchedulerHEFT.cpp
+    ParallelUS/runtime/src/parallelus/SchedulerPAMS.cpp
+    ParallelUS/runtime/src/parallelus/Task.cpp
+    ParallelUS/runtime/src/parallelus/Worker.hpp
     ParallelOCR/include/parallelocr/Image.hpp
     ParallelOCR/include/parallelocr/Letter.hpp
     ParallelOCR/include/parallelocr/Coach.hpp

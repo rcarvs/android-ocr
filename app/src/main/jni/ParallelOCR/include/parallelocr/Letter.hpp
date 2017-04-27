@@ -1,7 +1,7 @@
 //
 // Created by Renan Carvalho
 //
-#include "../../../ParallelME/runtime/include/parallelme/ParallelME.hpp"
+#include "../../../ParallelUS/runtime/include/parallelus/ParallelUS.hpp"
 #include <parallelocr/ParallelOCR.hpp>
 #include <string>
 #include <cctype>
@@ -58,7 +58,7 @@ class Letter{
         }
 
         std::string normalizeCrossingValue(unsigned int *ccount);
-        void crossing(std::shared_ptr<parallelme::Runtime> runtime,std::shared_ptr<parallelme::Program> program,std::shared_ptr<Coach> coach);
+        void crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_ptr<parallelus::Program> program,std::shared_ptr<Coach> coach);
         bool letterIdentification(std::shared_ptr<Coach> coach);
         std::string _letter;
     private:

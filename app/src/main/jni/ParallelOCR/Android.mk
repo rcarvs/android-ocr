@@ -8,7 +8,7 @@
 
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_SHARED_LIBRARIES := ParallelMERuntime
+LOCAL_SHARED_LIBRARIES := ParallelUSRuntime
 LOCAL_MODULE := ParallelOCR
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 LOCAL_CFLAGS := -Ofast -Wall -Wextra -Werror

@@ -33,40 +33,40 @@ Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCoun
 
 void Image::bitmapTransformBlackAndWhite(){
     clock_t begin = clock();
-    auto bitmapBuffer = std::make_shared<parallelme::Buffer>(parallelme::Buffer::sizeGenerator((this->getHeight()*this->getWidth()),parallelme::Buffer::RGBA));
+    auto bitmapBuffer = std::make_shared<parallelus::Buffer>(parallelus::Buffer::sizeGenerator((this->getHeight()*this->getWidth()),parallelus::Buffer::RGBA));
     bitmapBuffer->setAndroidBitmapSource(this->getEnv(),this->getBitmap());
-    auto rBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    auto rBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
     rBuffer->setSource(this->_r);
-    auto gBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    auto gBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
     gBuffer->setSource(this->_g);
-    auto bBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    auto bBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
     bBuffer->setSource(this->_b);
-    auto labelBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    auto labelBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
     labelBuffer->setSource(this->_label);
-    auto checkedBuffer = std::make_shared<parallelme::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
+    auto checkedBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int*)*this->getWidth()*this->getHeight());
     checkedBuffer->setSource(this->_checked);
     clock_t end = clock();
     double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Buffers Initialization: %f",elapsed_secs);
     begin = clock();
-    auto task = std::make_unique<parallelme::Task>(this->getProgram());
+    auto task = std::make_unique<parallelus::Task>(this->getProgram());
     task->addKernel("blackandwhite");
-    task->setConfigFunction([=] (parallelme::DevicePtr &device, parallelme::KernelHash &kernelHash) {
+    task->setConfigFunction([=] (parallelus::DevicePtr &device, parallelus::KernelHash &kernelHash,unsigned type) {
             device = device;
             kernelHash["blackandwhite"]
-            ->setArg(0, bitmapBuffer)
-            ->setArg(1, rBuffer)
-            ->setArg(2, gBuffer)
-            ->setArg(3, bBuffer)
-            ->setArg(4, labelBuffer)
-            ->setArg(5, checkedBuffer)
-            ->setWorkSize((this->getWidth()*this->getHeight()));
+            ->setArg(0, bitmapBuffer,type)
+            ->setArg(1, rBuffer,type)
+            ->setArg(2, gBuffer,type)
+            ->setArg(3, bBuffer,type)
+            ->setArg(4, labelBuffer,type)
+            ->setArg(5, checkedBuffer,type)
+            ->setWorkSize((this->getWidth()*this->getHeight()),1,1,type);
     });
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task Configuration: %f",elapsed_secs);
     begin = clock();
-    this->getRuntime()->submitTask(std::move(task));
+    this->getRuntime()->submitTask(std::move(task),2);//internal execution
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task submition: %f",elapsed_secs);
@@ -76,12 +76,15 @@ void Image::bitmapTransformBlackAndWhite(){
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Runtime Finish: %f",elapsed_secs);
     begin = clock();
-    bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap());
-    rBuffer->copyTo(this->_r);
-    gBuffer->copyTo(this->_g);
-    bBuffer->copyTo(this->_b);
-    labelBuffer->copyTo(this->_label);
-    checkedBuffer->copyTo(this->_checked);
+    task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+        bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap(),0);
+        rBuffer->copyTo(this->_r,0);
+        gBuffer->copyTo(this->_g,0);
+        bBuffer->copyTo(this->_b,0);
+        labelBuffer->copyTo(this->_label,0);
+        checkedBuffer->copyTo(this->_checked,1);
+
+    });
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Result Data Copy: %f",elapsed_secs);

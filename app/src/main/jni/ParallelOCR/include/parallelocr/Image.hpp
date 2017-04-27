@@ -2,7 +2,7 @@
 // Created by Renan Carvalho
 //
 #include <jni.h>
-#include "../../../ParallelME/runtime/include/parallelme/ParallelME.hpp"
+#include "../../../ParallelUS/runtime/include/parallelus/ParallelUS.hpp"
 #include <android/bitmap.h>
 #include <parallelocr/ParallelOCR.hpp>
 #ifndef OPTICALCHARACTERRECOGNITIONPARALLEL_IMAGE_HPP
@@ -54,20 +54,20 @@ class Image {
         inline std::shared_ptr<Coach> getCoach(){
             return this->_coach;
         }
-        inline std::shared_ptr<parallelme::Runtime> getRuntime(){
+        inline std::shared_ptr<parallelus::Runtime> getRuntime(){
             return this->_runtime;
         }
-        inline std::shared_ptr<parallelme::Program> getProgram(){
+        inline std::shared_ptr<parallelus::Program> getProgram(){
             return this->_program;
         }
         inline void setCoach(std::shared_ptr<Coach> coach){
             this->_coach = coach;
         }
-        inline void setRuntime(std::shared_ptr<parallelme::Runtime> runtime){
+        inline void setRuntime(std::shared_ptr<parallelus::Runtime> runtime){
             this->_runtime = runtime;
         }
 
-        inline void setProgram(std::shared_ptr<parallelme::Program> program){
+        inline void setProgram(std::shared_ptr<parallelus::Program> program){
             this->_program = program;
         }
         inline uint32_t getStride(){
@@ -110,8 +110,8 @@ class Image {
         JNIEnv* _env;
         jobject *_bitmap;
         std::shared_ptr<Coach> _coach;
-        std::shared_ptr<parallelme::Runtime> _runtime;
-        std::shared_ptr<parallelme::Program> _program;
+        std::shared_ptr<parallelus::Runtime> _runtime;
+        std::shared_ptr<parallelus::Program> _program;
         unsigned int _height,_width;
         void *_storedPixels;
         uint32_t _stride;

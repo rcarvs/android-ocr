@@ -1,8 +1,8 @@
 ./obj/local/armeabi-v7a/objs/ParallelOCR/src/parallelocr/Letter.o: \
   jni/ParallelOCR/src/parallelocr/Letter.cpp \
   jni/ParallelOCR/include/parallelocr/Letter.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/ParallelME.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Buffer.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/ParallelUS.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Buffer.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdlib \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__config \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stdlib.h \
@@ -28,8 +28,6 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstring \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/atomic \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef_min_max \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Device.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Kernel.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdio \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stdio.h \
@@ -38,33 +36,49 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cctype \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctype.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/algorithm \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Program.hpp \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Runtime.hpp \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/vector \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__bit_reference \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/climits \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Scheduler.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/sstream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ostream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ios \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__locale \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/chrono \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime \
   /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/time.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/climits \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/errno.h \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/locale.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/streambuf \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/locale \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdarg \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/bitset \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/istream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/iostream \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/../../src/parallelus/util/error.h \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/../../src/parallelus/util/platform.h \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Device.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Kernel.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/NetworkManager.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/vector \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stddef.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/list \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerHEFT.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerPAMS.hpp \
-  jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Task.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Program.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Runtime.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Scheduler.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerFCFS.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerHEFT.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerPAMS.hpp \
+  jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Task.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/unordered_map \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__hash_table \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cmath \
@@ -75,9 +89,9 @@
 
 jni/ParallelOCR/include/parallelocr/Letter.hpp:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/ParallelME.hpp:
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/ParallelUS.hpp:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Buffer.hpp:
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Buffer.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdlib:
 
@@ -129,10 +143,6 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef_min_max:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Device.hpp:
-
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Kernel.hpp:
-
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdio:
@@ -149,31 +159,15 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/algorithm:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Program.hpp:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/sstream:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ostream:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ios:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__locale:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set:
-
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Runtime.hpp:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/vector:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__bit_reference:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/climits:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer:
-
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Scheduler.hpp:
-
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base:
 
@@ -185,6 +179,8 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ratio:
 
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/climits:
+
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno:
@@ -193,15 +189,61 @@ jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallel
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support:
 
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/locale.h:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/streambuf:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/locale:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdarg:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/bitset:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/istream:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/iostream:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/../../src/parallelus/util/error.h:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/../../src/parallelus/util/platform.h:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Device.hpp:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Kernel.hpp:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/NetworkManager.hpp:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/vector:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stddef.h:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree:
+
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/list:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex:
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Program.hpp:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerHEFT.hpp:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/SchedulerPAMS.hpp:
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Runtime.hpp:
 
-jni/ParallelOCR/include/parallelocr/../../../ParallelME/runtime/include/parallelme/Task.hpp:
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Scheduler.hpp:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerFCFS.hpp:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerHEFT.hpp:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/SchedulerPAMS.hpp:
+
+jni/ParallelOCR/include/parallelocr/../../../ParallelUS/runtime/include/parallelus/Task.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/unordered_map:
 
