@@ -30,27 +30,21 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__undef_min_max \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/climits \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer \
-  jni/ParallelME/runtime/include/parallelme/ParallelME.hpp \
-  jni/ParallelME/runtime/include/parallelme/Buffer.hpp \
+  jni/ParallelUS/runtime/include/parallelus/ParallelUS.hpp \
+  jni/ParallelUS/runtime/include/parallelus/Buffer.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdlib \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stdlib.h \
-  jni/ParallelME/runtime/include/parallelme/Device.hpp \
-  jni/ParallelME/runtime/include/parallelme/Kernel.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdio \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cwchar \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cwctype \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cctype \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctype.h \
-  jni/ParallelME/runtime/include/parallelme/Program.hpp \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set \
-  jni/ParallelME/runtime/include/parallelme/Runtime.hpp \
-  jni/ParallelME/runtime/include/parallelme/Scheduler.hpp \
-  jni/ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/sstream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ostream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ios \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__locale \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/chrono \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctime \
@@ -59,11 +53,32 @@
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/system_error \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cerrno \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/locale.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/streambuf \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/locale \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdarg \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/bitset \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/istream \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/iostream \
+  jni/ParallelUS/runtime/include/parallelus/../../src/parallelus/util/error.h \
+  jni/ParallelUS/runtime/include/parallelus/../../src/parallelus/util/platform.h \
+  jni/ParallelUS/runtime/include/parallelus/Device.hpp \
+  jni/ParallelUS/runtime/include/parallelus/Kernel.hpp \
+  jni/ParallelUS/runtime/include/parallelus/NetworkManager.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stddef.h \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/list \
-  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex \
-  jni/ParallelME/runtime/include/parallelme/SchedulerHEFT.hpp \
-  jni/ParallelME/runtime/include/parallelme/SchedulerPAMS.hpp \
-  jni/ParallelME/runtime/include/parallelme/Task.hpp \
+  jni/ParallelUS/runtime/include/parallelus/Program.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set \
+  jni/ParallelUS/runtime/include/parallelus/Runtime.hpp \
+  jni/ParallelUS/runtime/include/parallelus/Scheduler.hpp \
+  jni/ParallelUS/runtime/include/parallelus/SchedulerFCFS.hpp \
+  /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable \
+  jni/ParallelUS/runtime/include/parallelus/SchedulerHEFT.hpp \
+  jni/ParallelUS/runtime/include/parallelus/SchedulerPAMS.hpp \
+  jni/ParallelUS/runtime/include/parallelus/Task.hpp \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/unordered_map \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__hash_table \
   /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cmath \
@@ -134,17 +149,13 @@
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__split_buffer:
 
-jni/ParallelME/runtime/include/parallelme/ParallelME.hpp:
+jni/ParallelUS/runtime/include/parallelus/ParallelUS.hpp:
 
-jni/ParallelME/runtime/include/parallelme/Buffer.hpp:
+jni/ParallelUS/runtime/include/parallelus/Buffer.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdlib:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stdlib.h:
-
-jni/ParallelME/runtime/include/parallelme/Device.hpp:
-
-jni/ParallelME/runtime/include/parallelme/Kernel.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/string:
 
@@ -158,23 +169,15 @@ jni/ParallelME/runtime/include/parallelme/Kernel.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ctype.h:
 
-jni/ParallelME/runtime/include/parallelme/Program.hpp:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/sstream:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ostream:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/ios:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__locale:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set:
-
-jni/ParallelME/runtime/include/parallelme/Runtime.hpp:
-
-jni/ParallelME/runtime/include/parallelme/Scheduler.hpp:
-
-jni/ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp:
-
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__mutex_base:
 
@@ -192,15 +195,57 @@ jni/ParallelME/runtime/include/parallelme/SchedulerFCFS.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__threading_support:
 
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/functional:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/android/support/include/locale.h:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/streambuf:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/locale:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/cstdarg:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/bitset:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/istream:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/iostream:
+
+jni/ParallelUS/runtime/include/parallelus/../../src/parallelus/util/error.h:
+
+jni/ParallelUS/runtime/include/parallelus/../../src/parallelus/util/platform.h:
+
+jni/ParallelUS/runtime/include/parallelus/Device.hpp:
+
+jni/ParallelUS/runtime/include/parallelus/Kernel.hpp:
+
+jni/ParallelUS/runtime/include/parallelus/NetworkManager.hpp:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/stddef.h:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/map:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/__tree:
+
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/list:
 
-/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/mutex:
+jni/ParallelUS/runtime/include/parallelus/Program.hpp:
 
-jni/ParallelME/runtime/include/parallelme/SchedulerHEFT.hpp:
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/set:
 
-jni/ParallelME/runtime/include/parallelme/SchedulerPAMS.hpp:
+jni/ParallelUS/runtime/include/parallelus/Runtime.hpp:
 
-jni/ParallelME/runtime/include/parallelme/Task.hpp:
+jni/ParallelUS/runtime/include/parallelus/Scheduler.hpp:
+
+jni/ParallelUS/runtime/include/parallelus/SchedulerFCFS.hpp:
+
+/home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/condition_variable:
+
+jni/ParallelUS/runtime/include/parallelus/SchedulerHEFT.hpp:
+
+jni/ParallelUS/runtime/include/parallelus/SchedulerPAMS.hpp:
+
+jni/ParallelUS/runtime/include/parallelus/Task.hpp:
 
 /home/labpi/Android/Sdk/ndk-bundle/sources/cxx-stl/llvm-libc++/include/unordered_map:
 

@@ -8,7 +8,7 @@
 #include <string.h>
 #include <ctype.h>
 using namespace parallelocr;
-
+using namespace parallelus;
 
 Coach::Coach(JNIEnv *env,jobject javaAssetManager){
     this->setEnv(env);

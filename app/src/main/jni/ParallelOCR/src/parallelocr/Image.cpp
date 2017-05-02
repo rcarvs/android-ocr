@@ -8,7 +8,7 @@
 #include <time.h>
 
 using namespace parallelocr;
-
+using namespace parallelus;
 Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCount(0){
     AndroidBitmapInfo  info;
     int ret;
@@ -77,6 +77,10 @@ void Image::bitmapTransformBlackAndWhite(){
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Runtime Finish: %f",elapsed_secs);
     begin = clock();
     task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+        unsigned t = type;
+        t=!t;
+        kernelHash = kernelHash;
+        device = device;
         bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap(),0);
         rBuffer->copyTo(this->_r,0);
         gBuffer->copyTo(this->_g,0);

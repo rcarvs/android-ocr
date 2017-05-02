@@ -7,7 +7,7 @@
 #include <time.h>
 
 using namespace parallelocr;
-
+using namespace parallelus;
 inline bool isInteger(const std::string & s){
    if(s.empty() || ((!isdigit(s[0])) && (s[0] != '-') && (s[0] != '+'))) return false ;
 
@@ -65,7 +65,7 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
                 ->setArg(0, labelsBuffer,type)
                 ->setArg(1, widthBuffer,type)
                 ->setArg(2, ccountBuffer,type)
-                ->setWorkSize((this->getDownLimit()-this->getUpLimit()),type);
+                ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
             }
             /*kernelHash["crossing"]
                 ->setArg(0, labelsBuffer)
@@ -81,7 +81,7 @@ kernelHash["identification"]
                 ->setArg(3, heightBuffer,type)
                 ->setArg(4, rotuleBuffer,type)
                 ->setArg(5, letterResultBuffer,type)
-                ->setWorkSize(1,type); //code is sequential
+                ->setWorkSize(1,1,1,type); //code is sequential
     });
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -98,17 +98,21 @@ kernelHash["identification"]
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     coach->_finish[coach->_count_evaluation] = elapsed_secs;
-    begin = clock();
+
     task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+        //begin = clock();
+        unsigned t = type;
+        t=!t;
         kernelHash = kernelHash;
         device = device;
-        type = type;
+
         ccountBuffer->copyTo(ccount,0);
-        letterResultBuffer->copyTo(&result,1);
-        end = clock();
-        elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+        letterResultBuffer->copyTo((void*)&result,1);
+
         coach->_result[coach->_count_evaluation] = elapsed_secs;
         coach->_count_evaluation++;
+        //end = clock();
+        //elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
         __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         if((result-17) <= 26){
             __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui69 %d",(result));
