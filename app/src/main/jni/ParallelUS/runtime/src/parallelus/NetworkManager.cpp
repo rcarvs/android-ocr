@@ -22,8 +22,9 @@ void NetworkManager::initNetwork(){
 	
     __android_log_print(ANDROID_LOG_ERROR, "DEBUG", "[NETMANAGER]Creating Socket\n");
     struct sockaddr_in serv_addr;
+
     _sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    __android_log_print(ANDROID_LOG_ERROR, "DEBUG", "[NETMANAGER]Socket Created %d\n", _sockfd);
+    __android_log_print(ANDROID_LOG_ERROR, "DEBUG", "[NETMANAGER]Socket Created (%d) %d - %s\n",AF_INET,_sockfd,std::strerror(_sockfd));
     
     bzero((char *) &serv_addr, sizeof(serv_addr));
     int portno = 5775;

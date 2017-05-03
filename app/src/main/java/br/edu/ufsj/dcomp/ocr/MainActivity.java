@@ -30,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.tv);
 
 
-        final Controller controller = new Controller();
-        controller.startJniStructures(getAssets());
+
         //controller.createLabels(image,tv);
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            controller.createLabels(image,tv);
+                Controller controller = new Controller();
+                controller.startJniStructures(getAssets());
+                controller.createLabels(image,tv);
             //imgView.setImageBitmap(image);
             }
         });
