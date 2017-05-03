@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/labpi/Documentos/renan/projetos/OpticalCharacterRecognitionParallel/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="/home/labpi/Documentos/renan/projetos/OpticalCharacterRecognitionParallel/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_4ebc5f5b6835c8662b7199f7e1041ab7c3a976e7/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/labpi/Documentos/renan/projetos/OpticalCharacterRecognitionParallel/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="e3f5f79405f7d888de125e39ae75c867e2365c76">
+        <dex dex="/home/labpi/Documentos/renan/projetos/OpticalCharacterRecognitionParallel/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_a46709df41c73a3f0cfce44e684278107edb5806/classes.dex" />
+    </item>
+
+</items>
