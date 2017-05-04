@@ -39,14 +39,19 @@ std::unique_ptr<Task> SchedulerFCFS::pop(Device &device){
 std::unique_ptr<Task> SchedulerFCFS::netpop(){
 	
     std::unique_lock<std::mutex> lock(_mutex);
-
+    __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui999");
     if(!_taskList.empty()) {
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9991");
         std::unique_ptr<Task> retTask = std::move(_taskList.front());
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9992");
         _taskList.pop_front();
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9993");
         return retTask;
     }
     else {
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9994");
         _cv.notify_all();
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9995");
         return nullptr;
     }
 }

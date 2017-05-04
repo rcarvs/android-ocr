@@ -8,7 +8,7 @@ file.write("__kernel void identification( __global uint *trainData, __global uin
 #__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){ uint id = get_global_id(0); uint changes = 0; for (uint teste = 0;teste < 1;teste++){ changes = 0; for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){ if(letter[i] != letter[i+1]){ changes++; } } } ccount[id] = changes; } 
 i = 1
 size = 1000
-while i <= 100:
+while i <= 1:
 	file.write("__kernel void fe"+str(i)+"(__global uint *letter,__global uint *width,__global uint *ccount){ uint id = get_global_id(0); uint changes = 0; for (uint teste = 0;teste < "+str(size)+";teste++){ changes = 0; for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){ if(letter[i] != letter[i+1]){ changes++; } } } ccount[id] = changes; } ")
 	i += 1	
 file.write("__kernel void crossing(__global uint *letter,__global uint *width,__global uint *ccount){ uint id = get_global_id(0); uint changes = 0; for (uint teste = 0;teste < 1;teste++){ changes = 0; for(uint i=(id*width[0]);i < (id*width[0]+width[0]-1);i++){ if(letter[i] != letter[i+1]){ changes++; } } } ccount[id] = changes; } __kernel void blackandwhite(__global uchar4 *image,__global uint *r,__global uint *g,__global uint *b,__global uint *label,__global uint *checked) { int gid = get_global_id(0); uchar4 pixel = image[gid]; label[gid] = checked[gid] = 0; if((pixel.x+pixel.y+pixel.z) > 645){ r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 255; }else{ r[gid] = g[gid] = b[gid] = pixel.x = pixel.y = pixel.z = 0; } image[gid] = pixel; }")

@@ -66,7 +66,7 @@ void Image::bitmapTransformBlackAndWhite(){
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task Configuration: %f",elapsed_secs);
     begin = clock();
-    this->getRuntime()->submitTask(std::move(task),2);//internal execution
+    this->getRuntime()->submitTask(std::move(task),3);//internal execution
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task submition: %f",elapsed_secs);
@@ -76,19 +76,12 @@ void Image::bitmapTransformBlackAndWhite(){
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Runtime Finish: %f",elapsed_secs);
     begin = clock();
-    task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
-        unsigned t = type;
-        t=!t;
-        kernelHash = kernelHash;
-        device = device;
-        bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap(),0);
-        rBuffer->copyTo(this->_r,0);
-        gBuffer->copyTo(this->_g,0);
-        bBuffer->copyTo(this->_b,0);
-        labelBuffer->copyTo(this->_label,0);
-        checkedBuffer->copyTo(this->_checked,1);
-
-    });
+    bitmapBuffer->copyToAndroidBitmap(this->getEnv(),this->getBitmap(),0);
+    rBuffer->copyTo(this->_r,0);
+    gBuffer->copyTo(this->_g,0);
+    bBuffer->copyTo(this->_b,0);
+    labelBuffer->copyTo(this->_label,0);
+    checkedBuffer->copyTo(this->_checked,1);
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Result Data Copy: %f",elapsed_secs);

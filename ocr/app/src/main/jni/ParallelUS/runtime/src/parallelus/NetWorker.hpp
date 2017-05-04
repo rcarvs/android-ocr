@@ -99,9 +99,13 @@ public:
                     ERROR_PRINTER_FUNC("[NETWORKER]Executed.");
                     continue;
                 }
+                __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9996");
                 if(_kill)
                     return;
+                __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9998");
+
                 _cv.wait(lock);
+                __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9999");
             }
 
             if(jvm)
