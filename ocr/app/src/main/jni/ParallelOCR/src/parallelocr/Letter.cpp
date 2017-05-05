@@ -67,14 +67,7 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
                 ->setArg(2, ccountBuffer,type)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
             }
-            /*kernelHash["crossing"]
-                ->setArg(0, labelsBuffer)
-                ->setArg(1, widthBuffer)
-                ->setArg(2, ccountBuffer)
-                ->setWorkSize((this->getDownLimit()-this->getUpLimit()));*/
-
-
-kernelHash["identification"]
+            kernelHash["identification"]
                 ->setArg(0, dataBuffer,type)
                 ->setArg(1, dataSizeBuffer,type)
                 ->setArg(2, ccountBuffer,type)
@@ -99,7 +92,8 @@ kernelHash["identification"]
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     coach->_finish[coach->_count_evaluation] = elapsed_secs;
 
-    task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+    /*task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         //begin = clock();
         unsigned t = type;
         t=!t;
@@ -107,13 +101,12 @@ kernelHash["identification"]
         device = device;
 
         ccountBuffer->copyTo(ccount,0);
-        letterResultBuffer->copyTo((void*)&result,1);
+        //letterResultBuffer->copyTo(&result,1);
 
         coach->_result[coach->_count_evaluation] = elapsed_secs;
         coach->_count_evaluation++;
         //end = clock();
         //elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         if((result-17) <= 26){
             __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui69 %d",(result));
             this->_letter = coach->_alfabhet[(result-17)];
@@ -121,7 +114,7 @@ kernelHash["identification"]
         }else{
             this->_letter = "";
         }
-    });
+    });*/
 
 
     /*bool train = false;

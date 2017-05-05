@@ -66,7 +66,7 @@ void Image::bitmapTransformBlackAndWhite(){
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task Configuration: %f",elapsed_secs);
     begin = clock();
-    this->getRuntime()->submitTask(std::move(task),3);//internal execution
+    this->getRuntime()->submitTask(std::move(task),1);//internal execution
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     __android_log_print(ANDROID_LOG_INFO, "Evaluation Time", "Task blackAndWhite - Task submition: %f",elapsed_secs);
@@ -336,7 +336,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 //create the task in the crossing function
                 this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
 
-                __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");
+                //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");
             }
             /*
             ----------------------------------------
