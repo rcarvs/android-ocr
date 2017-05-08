@@ -11,7 +11,7 @@ include $(CLEAR_VARS)
 LOCAL_SHARED_LIBRARIES := ParallelUSRuntime
 LOCAL_MODULE := ParallelOCR
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
-LOCAL_CFLAGS := -Ofast -Wall -Wextra -Werror
+LOCAL_CFLAGS := -Ofast -Wall -Wextra -Werror -Wunused-parameter
 LOCAL_CPPFLAGS := -Ofast -Wall -Wextra -Werror -std=c++14 -fexceptions
 LOCAL_CPP_FEATURES += exceptions
 LOCAL_LDLIBS := -llog -ldl -ljnigraphics -landroid

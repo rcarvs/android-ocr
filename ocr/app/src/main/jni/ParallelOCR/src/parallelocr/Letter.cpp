@@ -100,7 +100,7 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
         kernelHash = kernelHash;
         device = device;
 
-        ccountBuffer->copyTo(ccount,0);
+        ccountBuffer->copyTo(ccount,1);
         //letterResultBuffer->copyTo(&result,1);
 
         coach->_result[coach->_count_evaluation] = elapsed_secs;
@@ -114,8 +114,8 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
         }else{
             this->_letter = "";
         }
-    });*/
-
+    });
+    */
 
     /*bool train = false;
 
