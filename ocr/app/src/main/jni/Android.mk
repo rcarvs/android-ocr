@@ -9,7 +9,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := OCR
 LOCAL_C_INCLUDES := $(PU_JNI_PATH)/runtime/include $(OCR_JNI_PATH)/include
 
-LOCAL_CPPFLAGS := -Ofast -Wall -Wextra -Werror -Wno-unused-parameter -std=c++14
+LOCAL_CPPFLAGS := -Ofast -Wall -Wextra -Wno-unused-parameter -Wno-deprecated-register -Werror -std=c++14 -fexceptions
+
 LOCAL_SHARED_LIBRARIES := ParallelUSRuntime ParallelOCR
 
 LOCAL_SRC_FILES := br_edu_ufsj_dcomp_ocr_Controller.cpp

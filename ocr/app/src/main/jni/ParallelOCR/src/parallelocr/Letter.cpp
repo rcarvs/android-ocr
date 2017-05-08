@@ -95,11 +95,6 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     /*task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
         __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         //begin = clock();
-        unsigned t = type;
-        t=!t;
-        kernelHash = kernelHash;
-        device = device;
-
         ccountBuffer->copyTo(ccount,1);
         //letterResultBuffer->copyTo(&result,1);
 
@@ -114,8 +109,8 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
         }else{
             this->_letter = "";
         }
-    });
-    */
+    });*/
+
 
     /*bool train = false;
 
