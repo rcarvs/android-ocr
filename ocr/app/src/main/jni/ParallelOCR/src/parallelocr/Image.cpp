@@ -6,10 +6,11 @@
 #include <parallelocr/Image.hpp>
 #include <android/log.h>
 #include <time.h>
+#include <thread>
 
 using namespace parallelocr;
 using namespace parallelus;
-Image::Image(JNIEnv* env,jobject *bitmap): _env(env),_bitmap(bitmap),_letterCount(0){
+Image::Image(JNIEnv* env,jobject *bitmap,JavaVM *jvm): _jvm(jvm),_env(env),_bitmap(bitmap),_letterCount(0){
     AndroidBitmapInfo  info;
     int ret;
 
@@ -306,38 +307,53 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
             |   Aqui vira um submit task para rodar a identificação    |
             ____________________________________________________________
             */
-            if(this->_letters[this->getLetterCount()].getDownLimit() != this->_letters[this->getLetterCount()].getUpLimit() && this->_letters[this->getLetterCount()].getRightLimit() != this->_letters[this->getLetterCount()].getLeftLimit()){
-                //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
+            std::thread t([=] () mutable {
+                _env = nullptr;
 
-                //here I have the letters limits. Create a copy of matrix for send to buffer memory
-                //it can go to another thread
+                if(_jvm) {
+                    if(_jvm->AttachCurrentThread(&_env, nullptr))
+                        throw std::runtime_error("failed to attach thread to JVM.");
 
-                this->_letters[this->getLetterCount()].setLabels((unsigned  int*) malloc(sizeof(unsigned int)*(this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit())*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())));
-
-                for(unsigned int y = 0;
-                    y < (this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit());
-                    y++){
-                    for (unsigned int x = 0;
-                        x < (this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit());
-                        x++){
-                        /*
-                        DEBUGS
-                        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Top: %d", this->_letters[this->getLetterCount()].getUpLimit()+y);
-                        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Left: %d", this->_letters[this->getLetterCount()].getLeftLimit()+x);
-                        __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Pos: %d - Label: %d", (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),this->_pixels[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+(this->_letters[this->getLetterCount()].getLeftLimit()+x)].getLabel());
-                        */
-                        this->_letters[this->getLetterCount()].setLabelElement(
-                        (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),
-                        this->_label[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))
-                                    +(this->_letters[this->getLetterCount()].getLeftLimit()+x)]);
-                    }
                 }
-                //now I have a letter in another vector and it's ready to be processed for feature extraction
-                //create the task in the crossing function
-                this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
 
-                //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");
-            }
+                if(this->_letters[this->getLetterCount()].getDownLimit() != this->_letters[this->getLetterCount()].getUpLimit() && this->_letters[this->getLetterCount()].getRightLimit() != this->_letters[this->getLetterCount()].getLeftLimit()){
+                    //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
+
+                    //here I have the letters limits. Create a copy of matrix for send to buffer memory
+                    //it can go to another thread
+
+                    this->_letters[this->getLetterCount()].setLabels((unsigned  int*) malloc(sizeof(unsigned int)*(this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit())*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())));
+
+                    for(unsigned int y = 0;
+                        y < (this->_letters[this->getLetterCount()].getDownLimit()-this->_letters[this->getLetterCount()].getUpLimit());
+                        y++){
+                        for (unsigned int x = 0;
+                            x < (this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit());
+                            x++){
+                            /*
+                            DEBUGS
+                            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Top: %d", this->_letters[this->getLetterCount()].getUpLimit()+y);
+                            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Left: %d", this->_letters[this->getLetterCount()].getLeftLimit()+x);
+                            __android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Pos: %d - Label: %d", (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),this->_pixels[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))+(this->_letters[this->getLetterCount()].getLeftLimit()+x)].getLabel());
+                            */
+                            this->_letters[this->getLetterCount()].setLabelElement(
+                            (y*(this->_letters[this->getLetterCount()].getRightLimit()-this->_letters[this->getLetterCount()].getLeftLimit())+x),
+                            this->_label[(this->getWidth()*(this->_letters[this->getLetterCount()].getUpLimit()+y))
+                                        +(this->_letters[this->getLetterCount()].getLeftLimit()+x)]);
+                        }
+                    }
+                    //now I have a letter in another vector and it's ready to be processed for feature extraction
+                    //create the task in the crossing function
+                    this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
+
+                    //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");
+                }
+                if(_jvm)
+                    _jvm->DetachCurrentThread();
+
+            });
+            t.detach();
+
             /*
             ----------------------------------------
             |    ATÉ AQUI NA NOVA THREAD           |
@@ -348,6 +364,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
             this->_letterCount++;
 
         }
+
 
     }
 

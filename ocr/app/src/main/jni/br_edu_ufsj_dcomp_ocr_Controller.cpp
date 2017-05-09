@@ -53,12 +53,16 @@ JNIEXPORT jlong JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeInit(JNIEnv 
 JNIEXPORT void JNICALL Java_br_edu_ufsj_dcomp_ocr_Controller_nativeCreateImageLabels(JNIEnv *env,jobject self,jlong dataPointerLong,jobject bitmap,jobject textViewOutOut){
     auto dataPointer = (NativeData *) dataPointerLong;
     dataPointer->begin = clock();
+
+    JavaVM *jvm;
+    env->GetJavaVM(&jvm);
+
     jclass clazz = (*env).FindClass("android/widget/TextView");
     jmethodID setText = (*env).GetMethodID(clazz, "setText", "(Ljava/lang/CharSequence;)V");
     //Initialize image class with pointer to image
 
     //Set the runtime e program objects in Image class
-    Image image(env,&bitmap);
+    Image image(env,&bitmap,jvm);
     image.setCoach(dataPointer->coach);
     image.setRuntime(dataPointer->runtime);
     image.setProgram(dataPointer->program);

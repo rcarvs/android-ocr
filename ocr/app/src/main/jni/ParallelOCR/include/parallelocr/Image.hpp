@@ -10,7 +10,7 @@
 namespace parallelocr{
 class Image {
     public:
-        Image(JNIEnv *env,jobject *bitmap);
+        Image(JNIEnv *env,jobject *bitmap,JavaVM *jvm);
 
         inline unsigned int getHeight(){
             return this->_height;
@@ -104,7 +104,7 @@ class Image {
         void relabelAndSearchLetters(unsigned int uplabel);
         void checkLabel(unsigned int index);
         void toLabel();
-
+        JavaVM *_jvm;
 
     private:
         JNIEnv* _env;
@@ -112,6 +112,8 @@ class Image {
         std::shared_ptr<Coach> _coach;
         std::shared_ptr<parallelus::Runtime> _runtime;
         std::shared_ptr<parallelus::Program> _program;
+
+
         unsigned int _height,_width;
         void *_storedPixels;
         uint32_t _stride;
