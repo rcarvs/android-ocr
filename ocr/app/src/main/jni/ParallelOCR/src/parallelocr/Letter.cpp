@@ -56,29 +56,40 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     auto task = std::make_unique<parallelus::Task>(program);
 
     //task->addKernel("crossing");
-    for(int i=1;i<=5;i++){
+    /*for(int i=1;i<=3;i++){
         std::string fname = "fe"+std::to_string(i);
         task->addKernel(fname);
+    }*/
+    //task->addKernel("identification");
+    for(int i=1;i<=15;i++){
+            std::string fname = "test"+std::to_string(i);
+            task->addKernel(fname);
     }
-    task->addKernel("identification");
 
     task->setConfigFunction([=] (parallelus::DevicePtr &device, parallelus::KernelHash &kernelHash,unsigned type) {
-            for(int i=1;i<=5;i++){
+            /*for(int i=1;i<=3;i++){
                 std::string fname = "fe"+std::to_string(i);
                 kernelHash[fname]
                 ->setArg(0, labelsBuffer,type)
                 ->setArg(1, widthBuffer,type)
                 ->setArg(2, ccountBuffer,type)
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
+            }*/
+            for(int i=1;i<=15;i++){
+                std::string fname = "test"+std::to_string(i);
+                kernelHash[fname]
+                    ->setArg(0,ccountBuffer,type)
+                    ->setArg(1,ccountBuffer,type)
+                    ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
             }
-            kernelHash["identification"]
+            /*kernelHash["identification"]
                 ->setArg(0, dataBuffer,type)
                 ->setArg(1, dataSizeBuffer,type)
                 ->setArg(2, ccountBuffer,type)
                 ->setArg(3, heightBuffer,type)
                 ->setArg(4, rotuleBuffer,type)
                 ->setArg(5, letterResultBuffer,type)
-                ->setWorkSize(1,1,1,type); //code is sequential
+                ->setWorkSize(1,1,1,type); //code is sequential*/
     });
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
@@ -90,10 +101,10 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
 
 
     task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
-        __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
+        //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         //begin = clock();
-        ccountBuffer->copyTo(ccount,1);
-        letterResultBuffer->copyTo((void*)&result,1);
+        /*ccountBuffer->copyTo(ccount,1);
+        //letterResultBuffer->copyTo((void*)&result,1);
 
         coach->_result[coach->_count_evaluation] = elapsed_secs;
         coach->_count_evaluation++;
@@ -105,7 +116,7 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
             __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui69*2");
         }else{
             this->_letter = "";
-        }
+        }*/
         cv.notify_one();
     });
 
