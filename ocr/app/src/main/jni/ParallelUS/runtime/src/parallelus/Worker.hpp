@@ -92,7 +92,7 @@ public:
                     continue;
                 }
                 if(_kill)
-                    return;
+                    break;
 
                 _cv.wait(lock);
             }

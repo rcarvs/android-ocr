@@ -8,9 +8,9 @@
 #include <sys/socket.h>
 #include <parallelus/ParallelUS.hpp>
 #include <parallelocr/ParallelOCR.hpp>
-
 #include "br_edu_ufsj_dcomp_ocr_Controller.h"
 #include <time.h>
+#include <mutex>
 
 using namespace parallelus;
 using namespace parallelocr;

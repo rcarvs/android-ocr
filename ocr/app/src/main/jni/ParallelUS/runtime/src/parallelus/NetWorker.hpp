@@ -101,7 +101,7 @@ public:
                 }
                 __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9996");
                 if(_kill)
-                    return;
+                    break;
                 __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui9998");
 
                 _cv.wait(lock);

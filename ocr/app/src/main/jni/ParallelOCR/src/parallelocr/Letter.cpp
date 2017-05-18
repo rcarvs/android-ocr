@@ -5,6 +5,7 @@
 #include <android/log.h>
 #include <string>
 #include <time.h>
+#include <condition_variable>
 
 using namespace parallelocr;
 using namespace parallelus;
@@ -16,6 +17,9 @@ inline bool isInteger(const std::string & s){
 
    return (*p == 0) ;
 }
+
+std::mutex mtx;
+std::condition_variable cv;
 
 char _alfabhet[26] ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','K','R','S','T','U','V','W','X','Y','Z'};
 void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_ptr<parallelus::Program> program,std::shared_ptr<Coach> coach){
@@ -52,14 +56,14 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     auto task = std::make_unique<parallelus::Task>(program);
 
     //task->addKernel("crossing");
-    for(int i=1;i<=1;i++){
+    for(int i=1;i<=5;i++){
         std::string fname = "fe"+std::to_string(i);
         task->addKernel(fname);
     }
     task->addKernel("identification");
+
     task->setConfigFunction([=] (parallelus::DevicePtr &device, parallelus::KernelHash &kernelHash,unsigned type) {
-            device = device;
-            for(int i=1;i<=1;i++){
+            for(int i=1;i<=5;i++){
                 std::string fname = "fe"+std::to_string(i);
                 kernelHash[fname]
                 ->setArg(0, labelsBuffer,type)
@@ -79,24 +83,17 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     end = clock();
     elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
     coach->_tasks[coach->_count_evaluation] = elapsed_secs;
-    begin = clock();
-    runtime->submitTask(std::move(task),3);//execucao externa
 
-    end = clock();
-    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    coach->_submission[coach->_count_evaluation] = elapsed_secs;
 
     begin = clock();
-    runtime->finish();
-    end = clock();
-    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-    coach->_finish[coach->_count_evaluation] = elapsed_secs;
+    //runtime->finish();
 
-    /*task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
+
+    task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
         __android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         //begin = clock();
         ccountBuffer->copyTo(ccount,1);
-        //letterResultBuffer->copyTo(&result,1);
+        letterResultBuffer->copyTo((void*)&result,1);
 
         coach->_result[coach->_count_evaluation] = elapsed_secs;
         coach->_count_evaluation++;
@@ -109,8 +106,21 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
         }else{
             this->_letter = "";
         }
-    });*/
+        cv.notify_one();
+    });
 
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    coach->_finish[coach->_count_evaluation] = elapsed_secs;
+
+    begin = clock();
+    runtime->submitTask(std::move(task),3);
+    std::unique_lock<std::mutex> lck(mtx);
+    cv.wait(lck);
+
+    end = clock();
+    elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+    coach->_submission[coach->_count_evaluation] = elapsed_secs;
 
     /*bool train = false;
 
