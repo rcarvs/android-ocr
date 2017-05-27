@@ -24,10 +24,20 @@ std::condition_variable cv;
 char _alfabhet[26] ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','K','R','S','T','U','V','W','X','Y','Z'};
 void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_ptr<parallelus::Program> program,std::shared_ptr<Coach> coach){
     clock_t begin = clock();
+    unsigned int *letters = (unsigned int*) malloc(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit())*(this->getRightLimit()-this->getLeftLimit()));
     auto labelsBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit())*(this->getRightLimit()-this->getLeftLimit()));
-    labelsBuffer->setSource(this->getLabels());
-    auto widthBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int));
-    unsigned int width = (this->getRightLimit()-this->getLeftLimit());
+    for(unsigned int i=0;i<(this->getDownLimit()-this->getUpLimit())*(this->getRightLimit()-this->getLeftLimit());i++){
+        letters[i] = this->_labels[i];
+
+    }
+    labelsBuffer->setSource(letters);
+    auto widthBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int)*2);
+    unsigned int *width = (unsigned int*) malloc(sizeof(unsigned int)*2);
+    width[0] = (this->getRightLimit()-this->getLeftLimit());
+    width[1] = (this->getRightLimit()-this->getLeftLimit());
+    __android_log_print(ANDROID_LOG_INFO, "Abudaddaaao1", "%d",width[0]);
+
+    __android_log_print(ANDROID_LOG_INFO, "Abudaddaaao1", "%d",letters[5758]);
     widthBuffer->setSource(&width);
     auto ccountBuffer = std::make_shared<parallelus::Buffer>(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit()));
     unsigned int *ccount = (unsigned int*) malloc(sizeof(unsigned int)*(this->getDownLimit()-this->getUpLimit()));
@@ -62,8 +72,10 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     }*/
     //task->addKernel("identification");
     for(int i=1;i<=15;i++){
-            std::string fname = "test"+std::to_string(i);
-            task->addKernel(fname);
+            /*std::string fname = "test"+std::to_string(i);
+            task->addKernel(fname);*/
+            std::string fname2 = "fe"+std::to_string(i);
+            task->addKernel(fname2);
     }
 
     task->setConfigFunction([=] (parallelus::DevicePtr &device, parallelus::KernelHash &kernelHash,unsigned type) {
@@ -76,11 +88,21 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
                 ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
             }*/
             for(int i=1;i<=15;i++){
-                std::string fname = "test"+std::to_string(i);
+                std::string fname2 = "fe"+std::to_string(i);
+                kernelHash[fname2]
+                ->setArg(0, labelsBuffer,type)
+                ->setArg(1, widthBuffer,type)
+                ->setArg(2, ccountBuffer,type)
+                ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
+                /*std::string fname = "test"+std::to_string(i);
                 kernelHash[fname]
-                    ->setArg(0,ccountBuffer,type)
-                    ->setArg(1,ccountBuffer,type)
-                    ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);
+                    ->setArg(0, ccountBuffer,type)
+                    ->setArg(1, widthBuffer,type)
+                    ->setArg(2, ccountBuffer,type)
+                    ->setArg(3,ccountBuffer,type)
+                    ->setArg(4,ccountBuffer,type)
+                    ->setArg(5,ccountBuffer,type)
+                    ->setWorkSize((this->getDownLimit()-this->getUpLimit()),1,1,type);*/
             }
             /*kernelHash["identification"]
                 ->setArg(0, dataBuffer,type)
@@ -103,9 +125,14 @@ void Letter::crossing(std::shared_ptr<parallelus::Runtime> runtime,std::shared_p
     task->setFinishFunction([=] (DevicePtr &device, KernelHash &kernelHash, unsigned type){
         //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui");
         //begin = clock();
-        /*ccountBuffer->copyTo(ccount,1);
-        //letterResultBuffer->copyTo((void*)&result,1);
+        ccountBuffer->copyTo(ccount,1);
 
+
+        for(unsigned int i=0;i<(this->getDownLimit()-this->getUpLimit());i++){
+            __android_log_print(ANDROID_LOG_INFO, "Abudaddaaao", "%d",ccount[i]);
+        }
+        //letterResultBuffer->copyTo((void*)&result,1);
+        /*
         coach->_result[coach->_count_evaluation] = elapsed_secs;
         coach->_count_evaluation++;
         //end = clock();
