@@ -45,6 +45,8 @@ class Coach{
         double *_finish;
         double *_result;
 
+        bool _running = false;
+
     private:
         JNIEnv *_env;
         AAssetManager *_assetManager;

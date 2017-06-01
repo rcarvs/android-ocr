@@ -302,12 +302,21 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
             double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
             this->getCoach()->_searchLetter[this->getCoach()->_count_labels] = elapsed_secs;
             this->getCoach()->_count_labels++;
+
             /*
             ------------------------------------------------------------
             |   Aqui vira um submit task para rodar a identificação    |
             ____________________________________________________________
             */
+
+
+            //verificar se ja nao esta rodando para uma letra pois agora vai rodar uma letra de cada vez
+
             if(this->_letters[this->getLetterCount()].getDownLimit() != this->_letters[this->getLetterCount()].getUpLimit() && this->_letters[this->getLetterCount()].getRightLimit() != this->_letters[this->getLetterCount()].getLeftLimit()){
+                //while(this->getCoach()->_running){
+                    //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "Esperando.");
+                //}
+                this->getCoach()->_running = true;
                 //__android_log_print(ANDROID_LOG_VERBOSE, "LogCpp", "%d %d %d %d.",this->_letters[this->getLetterCount()].getUpLimit(),this->_letters[this->getLetterCount()].getDownLimit(),this->_letters[this->getLetterCount()].getLeftLimit(),this->_letters[this->getLetterCount()].getRightLimit());
 
                 //here I have the letters limits. Create a copy of matrix for send to buffer memory
@@ -331,6 +340,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 }
                 //now I have a letter in another vector and it's ready to be processed for feature extraction
                 //create the task in the crossing function
+
                 this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
 
                 //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imgView = (ImageView) findViewById(R.id.imageView);
-        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste100);
+        image = BitmapFactory.decodeResource(getResources(),R.drawable.teste10);
         btnProcess = (Button) findViewById(R.id.btn_process);
         imgView.setImageBitmap(image);
 
