@@ -340,9 +340,7 @@ void Image::relabelAndSearchLetters(unsigned int uplabel){
                 }
                 //now I have a letter in another vector and it's ready to be processed for feature extraction
                 //create the task in the crossing function
-
                 this->_letters[this->getLetterCount()].crossing(this->getRuntime(),this->getProgram(),this->getCoach());
-
                 //__android_log_print(ANDROID_LOG_INFO, "Teste", "Entrou aqui4");
             }
 
